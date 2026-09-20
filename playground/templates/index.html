@@ -1,0 +1,394 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Ma Ano Ulam?</title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    z
+    <header class="top-header">
+        <div class="container header-content">
+
+            <a href="#" class="logo">
+                Ma Ano Ulam?
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="#" class="active">Discover</a>
+                <a href="#">Pantry</a>
+                <a href="#">Saved</a>
+            </nav>
+
+            <button class="icon-button" type="button">
+                <span class="material-symbols-outlined">
+                    person
+                </span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        
+        <section class="hero">
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <h1>
+                        What's in your fridge?
+                    </h1>
+
+                    <p>
+                        Enter the ingredients you have on hand, and we'll instantly
+                        generate delicious, vibrant recipes designed to reduce waste
+                        and nourish your body.
+                    </p>
+
+
+                    
+                    <div class="ingredient-box">
+
+                        <div class="ingredient-tags">
+
+                            <span class="ingredient-tag">
+                                Tomato
+                                <button type="button">x</button>
+                            </span>
+
+                            <span class="ingredient-tag">
+                                Chicken
+                                <button type="button">×</button>
+                            </span>
+
+                            <span class="ingredient-tag">
+                                Basil
+                                <button type="button">×</button>
+                            </span>
+
+                        </div>
+
+
+                        <form class="search-box">
+
+                            <span class="material-symbols-outlined search-icon">
+                                search
+                            </span>
+
+                            <input
+                                type="text"
+                                placeholder="Add an ingredient"
+                            >
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Find Recipes
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                
+                <div class="hero-image">
+
+                    <img
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq-IvAjagli-bZR_WtjRP9whc8os2_OMRpHZBeTnfnJ4ic6pgBNxoAEsPBm6M-d-e8FAFFQuJmff8Z5_Vp0RentAxJl4lr1YM8yOMaTwVScwx7Wfw0Mrp0zir9QfupXvoIcoTi-DVL38NBdV72Ui2-qvpu0Lkz1TKBQxPX5w6QWT3GwM316qY2aPJIgpbTMbqS2mza1wRIdANUrU3DtKkE_15fvoC0AKO7RV1Z--VtnXJ8Bb04CcQUiw"
+                        alt="Fresh tomatoes, basil and chicken"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        
+        <section class="trending-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Trending Now
+                        </h2>
+
+                        <p>
+                            Seasonal favorites loved by home cooks this week.
+                        </p>
+
+                    </div>
+
+                    <a href="#" class="view-all">
+
+                        View all
+
+                        <span class="material-symbols-outlined">
+                            arrow_forward
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="recipe-grid">
+
+
+                    
+                    <article class="recipe-card">
+
+                        <div class="recipe-image">
+
+                            <img
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMvYYj-k0PgIXetqd10lfUDm0jFdbcCEU4jpSmnkV3tsWvCDgNZSBIKfNgjI_oweX-W5HSnzhTacVansaO2PGFQB2FrlYEK2KmAf2jYaOgQgWtkZfzkAGlF_aGe5eI4SwhoWUwGscdd5sckIzo06gVqt5IrgrJLgVxiVNHZ3oI4cl-LAs7HHIG3BYgmp46Pz0DH06UFKdlxvaIOw8dbUXmpyoh4hrdY4WV8en96cpX42lMg5Y_I0aO7Q"
+                                alt="Rustic tomato galette"
+    >
+
+                            <span class="time-badge">
+
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+
+                                25m
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="recipe-content">
+
+                            <h3>
+                                Rustic Tomato Galette
+                            </h3>
+
+                            <div class="recipe-tags">
+
+                                <span>Tomato</span>
+                                <span>Basil</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    
+                    <article class="recipe-card">
+
+                        <div class="recipe-image">
+
+                            <img
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD08-d-l9WbXz_uIPOXWrNEIc5awcPGUr9d3siQ7HGvZLTTpQvRuUfyFxUpOdb6MX1pp01n9hO0LM5vBQGdD0J2X87525BtdaBNJFQj3CuAYl0E2oOLd9Ddp39kV0TRxnS-gRxZHDiG3jfMqjd4Oiqx4vjd2t3vK1Q21O4koCAhWWrF1ckWJF73U1cl_CdcKj9gt9BFq4nziam_9OND-FSAcjHefo-luEBwhzJsHWJVQaNdPkyx_3Mp5Q"
+                                alt="One pan lemon herb chicken">
+
+                            <span class="time-badge">
+
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+
+                                30m
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="recipe-content">
+
+                            <h3>
+                                One-Pan Lemon Herb Chicken
+                            </h3>
+
+                            <div class="recipe-tags">
+
+                                <span>Chicken</span>
+                                <span>Lemon</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    
+                    <article class="recipe-card">
+
+                        <div class="recipe-image">
+
+                            <img
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0ffSQlmvoV8bbvOw3y1VF924MKT2FMRs66N_zRZzcYRDb65VQb9yWkexEmLrl7jBQw1yxM_EOq8ktXJLQb5FZBshltF8GsaYJBa4yiAwg1CtXnVbsGKeZK-Q6nhwjl4tHNMxamQDfy-8-qirVcdNRql-g-zshCokApfdC742Be0mvoVor7sJdNbHJcnuiYIzObeMuCSzRI2XXWNZRDCH_5IpALiHuHwJOtrs0ht1NecU7zotkEBUOhg"
+                                alt="Zesty zucchini noodle salad">
+
+                            <span class="time-badge">
+
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+
+                                15m
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="recipe-content">
+
+                            <h3>
+                                Zesty Zoodle Salad
+                            </h3>
+
+                            <div class="recipe-tags">
+
+                                <span>Zucchini</span>
+                                <span>Tomato</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    
+                    <article class="recipe-card">
+
+                        <div class="recipe-image">
+
+                            <img
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiugtzSaEysrDvqSg5NDMMsb4geL4gItEhlXUosXg_roPdS0zaZlRNAanPjfkIwGT2P1080tE1rifoarGulfcOFYWyvqi2wonafVgpFzQZXIQAhyCDVop7FfqBeN5EdwHtGP-ImDrvY8Vq0boxAJ9cwEpvc46-NYrNpw5woyY42jEZnus1EAuJMKNNA5JtJ8-XqlvlOtZDbDCArpnggoBINltWmIdzsIEJTxaIM7Dw0wU9L3t2IJ1Sbg"
+                                alt="Creamy squash soup"
+                            >
+
+                            <span class="time-badge">
+
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+
+                                40m
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="recipe-content">
+
+                            <h3>
+                                Creamy Squash Soup
+                            </h3>
+
+                            <div class="recipe-tags">
+
+                                <span>Squash</span>
+                                <span>Coconut</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <a href="#" class="logo">
+                Ma Ano Ulam?
+            </a>
+
+
+            <nav class="footer-nav">
+
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+
+            </nav>
+
+
+            <p>
+                © 2026 Ma Ano Ulam? Fresh Vitality for every home cook.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    
+    <nav class="mobile-nav">
+
+        <a href="#">
+            <span class="material-symbols-outlined">
+                home
+            </span>
+            Home
+        </a>
+
+        <a href="#" class="mobile-active">
+            <span class="material-symbols-outlined">
+                explore
+            </span>
+            Discover
+        </a>
+
+        <a href="#">
+            <span class="material-symbols-outlined">
+                kitchen
+            </span>
+            Pantry
+        </a>
+
+        <a href="#">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+            Profile
+        </a>
+
+    </nav>
+
+</body>
+</html>
