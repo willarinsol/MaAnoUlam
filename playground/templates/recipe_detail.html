@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link href="{% static 'style.css' %}" rel="stylesheet" />
+    <link href="{% static 'recipe_detail.css' %}" rel="stylesheet" />
   </head>
   <body class="recipe-page">
     <!-- TopNavBar -->
@@ -63,9 +64,7 @@
           <!-- In Your Kitchen -->
           <div>
             <h3>
-              <span class="material-symbols-outlined text-primary"
-                >check_circle</span
-              >
+              <span class="material-symbols-outlined">check_circle</span>
               In Your Kitchen
             </h3>
             <ul>
@@ -87,19 +86,19 @@
           <div>
             <h3>Nutrition per serving</h3>
             <div class="nutrition-grid">
-              <div class="flex flex-col">
+              <div>
                 <span>Calories</span>
                 <span>{{ recipe.calories }}</span>
               </div>
-              <div class="flex flex-col">
+              <div>
                 <span>Protein</span>
                 <span>{{ recipe.protein }}g</span>
               </div>
-              <div class="flex flex-col">
+              <div>
                 <span>Carbs</span>
                 <span>{{ recipe.carbs }}g</span>
               </div>
-              <div class="flex flex-col">
+              <div>
                 <span>Fats</span>
                 <span>{{ recipe.fats }}g</span>
               </div>
@@ -114,9 +113,7 @@
             <div class="recipe-step">
               <div>{{ forloop.counter }}</div>
               <div>
-                <p class="font-body-lg text-body-lg text-on-surface">
-                  {{ step }}
-                </p>
+                <p>{{ step }}</p>
               </div>
             </div>
             {% empty %}
@@ -130,19 +127,19 @@
     <nav class="recipe-mobile-nav">
       <a href="#">
         <span class="material-symbols-outlined">home</span>
-        <span class="font-label-sm text-label-sm">Home</span>
+        <span>Home</span>
       </a>
       <a href="#">
         <span class="material-symbols-outlined">explore</span>
-        <span class="font-label-sm text-label-sm">Discover</span>
+        <span>Discover</span>
       </a>
       <a href="#">
         <span class="material-symbols-outlined">kitchen</span>
-        <span class="font-label-sm text-label-sm">Pantry</span>
+        <span>Pantry</span>
       </a>
       <a href="#">
         <span class="material-symbols-outlined">person</span>
-        <span class="font-label-sm text-label-sm">Profile</span>
+        <span>Profile</span>
       </a>
     </nav>
   </body>
