@@ -8,25 +8,26 @@ class Recipe(models.Model):
     prep_time = models.IntegerField(help_text="Time in minutes")
     tags = models.CharField(max_length=200, help_text="e.g., Tomato, Basil") 
     
-    # Add these new fields for the detail page:
+    # Text Fields
     description = models.TextField(blank=True, null=True)
     ingredients_list = models.TextField(help_text="Put each ingredient on a new line", blank=True)
     instructions = models.TextField(help_text="Put each step on a new line", blank=True)
+    
+    # Nutrition Fields
+    calories = models.IntegerField(default=0)
+    protein = models.IntegerField(default=0, help_text="in grams")
+    carbs = models.IntegerField(default=0, help_text="in grams")
+    fats = models.IntegerField(default=0, help_text="in grams")
     
     def __str__(self):
         return self.title
         
     def get_tags_list(self):
-        return [tag.strip() for tag in self.tags.split(',')]
-
+        return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
+        
     def get_ingredients_list(self):
         # Splits the text box into a list wherever you hit "Enter"
-        if self.ingredients_list:
-            return [ing.strip() for ing in self.ingredients_list.split('\n') if ing.strip()]
-        return []
+        return [ing.strip() for ing in self.ingredients_list.split('\n') if ing.strip()]
         
     def get_instructions_list(self):
-        # Splits the text box into a list wherever you hit "Enter"
-        if self.instructions:
-            return [inst.strip() for inst in self.instructions.split('\n') if inst.strip()]
-        return []
+        return [inst.strip() for inst in self.instructions.split('\n') if inst.strip()]

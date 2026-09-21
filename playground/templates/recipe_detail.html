@@ -19,7 +19,7 @@
   <body class="recipe-page">
     <!-- TopNavBar -->
     <header class="recipe-header">
-      <div>Garden Kitchen</div>
+      <div>MaAnoUlam?</div>
       <nav>
         <a href="#">Discover</a>
         <a href="#">Pantry</a>
@@ -48,11 +48,7 @@
               </span>
             </div>
             <h1>{{ recipe.title }}</h1>
-            <p>
-              A hearty, nourishing bowl packed with seasonal roasted vegetables,
-              fluffy quinoa, and a vibrant herb dressing that brings everything
-              together.
-            </p>
+            <p>{{recipe.description}}</p>
           </div>
           <button type="button">
             <span class="material-symbols-outlined">kitchen</span>
@@ -87,44 +83,25 @@
               </li>
             </ul>
           </div>
-          <!-- Missing Ingredients -->
-          <div>
-            <h3>
-              <span class="material-symbols-outlined">shopping_cart</span>
-              Missing Ingredients
-            </h3>
-            <ul>
-              <li>
-                <span>2 large Sweet Potatoes</span>
-              </li>
-              <li>
-                <span>1 bunch Fresh Parsley</span>
-              </li>
-              <li>
-                <span>1 Lemon</span>
-              </li>
-            </ul>
-            <button type="button">Add Missing to List</button>
-          </div>
           <!-- Nutrition -->
           <div>
             <h3>Nutrition per serving</h3>
             <div class="nutrition-grid">
               <div class="flex flex-col">
                 <span>Calories</span>
-                <span>420</span>
+                <span>{{ recipe.calories }}</span>
               </div>
               <div class="flex flex-col">
                 <span>Protein</span>
-                <span>12g</span>
+                <span>{{ recipe.protein }}g</span>
               </div>
               <div class="flex flex-col">
                 <span>Carbs</span>
-                <span>54g</span>
+                <span>{{ recipe.carbs }}g</span>
               </div>
               <div class="flex flex-col">
                 <span>Fats</span>
-                <span>18g</span>
+                <span>{{ recipe.fats }}g</span>
               </div>
             </div>
           </div>

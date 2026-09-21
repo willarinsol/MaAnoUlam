@@ -142,6 +142,7 @@ body {
 .hero-overlay {
   background: linear-gradient(to top, var(--background), transparent);
   opacity: 0.8;
+  pointer-events: none;
 }
 
 .recipe-hero-content {
@@ -205,10 +206,13 @@ body {
 }
 
 .recipe-hero button {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
+
   border: 0;
   border-radius: 999px;
   background: var(--primary);
