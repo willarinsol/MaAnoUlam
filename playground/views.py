@@ -1,7 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Recipe
 
-
-# Create your views here.
 def show_homepage(request):
-    return render(request, 'index.html')
+    # Fetch the latest 4 recipes from the database
+    trending_recipes = Recipe.objects.all()[:4] 
+    
+    # Pass them to the template
+    context = {
+        'recipes': trending_recipes
+    }
+    return render(request, 'index.html', context)

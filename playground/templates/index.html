@@ -110,103 +110,30 @@
           </div>
 
           <div class="recipe-grid">
-            <article class="recipe-card">
-              <div class="recipe-image">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMvYYj-k0PgIXetqd10lfUDm0jFdbcCEU4jpSmnkV3tsWvCDgNZSBIKfNgjI_oweX-W5HSnzhTacVansaO2PGFQB2FrlYEK2KmAf2jYaOgQgWtkZfzkAGlF_aGe5eI4SwhoWUwGscdd5sckIzo06gVqt5IrgrJLgVxiVNHZ3oI4cl-LAs7HHIG3BYgmp46Pz0DH06UFKdlxvaIOw8dbUXmpyoh4hrdY4WV8en96cpX42lMg5Y_I0aO7Q"
-                  alt="Rustic tomato galette"
-                />
-
-                <span class="time-badge">
-                  <span class="material-symbols-outlined"> schedule </span>
-
-                  25m
-                </span>
-              </div>
-
-              <div class="recipe-content">
-                <h3>Rustic Tomato Galette</h3>
-
-                <div class="recipe-tags">
-                  <span>Tomato</span>
-                  <span>Basil</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="recipe-card">
-              <div class="recipe-image">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD08-d-l9WbXz_uIPOXWrNEIc5awcPGUr9d3siQ7HGvZLTTpQvRuUfyFxUpOdb6MX1pp01n9hO0LM5vBQGdD0J2X87525BtdaBNJFQj3CuAYl0E2oOLd9Ddp39kV0TRxnS-gRxZHDiG3jfMqjd4Oiqx4vjd2t3vK1Q21O4koCAhWWrF1ckWJF73U1cl_CdcKj9gt9BFq4nziam_9OND-FSAcjHefo-luEBwhzJsHWJVQaNdPkyx_3Mp5Q"
-                  alt="One pan lemon herb chicken"
-                />
-
-                <span class="time-badge">
-                  <span class="material-symbols-outlined"> schedule </span>
-
-                  30m
-                </span>
-              </div>
-
-              <div class="recipe-content">
-                <h3>One-Pan Lemon Herb Chicken</h3>
-
-                <div class="recipe-tags">
-                  <span>Chicken</span>
-                  <span>Lemon</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="recipe-card">
-              <div class="recipe-image">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0ffSQlmvoV8bbvOw3y1VF924MKT2FMRs66N_zRZzcYRDb65VQb9yWkexEmLrl7jBQw1yxM_EOq8ktXJLQb5FZBshltF8GsaYJBa4yiAwg1CtXnVbsGKeZK-Q6nhwjl4tHNMxamQDfy-8-qirVcdNRql-g-zshCokApfdC742Be0mvoVor7sJdNbHJcnuiYIzObeMuCSzRI2XXWNZRDCH_5IpALiHuHwJOtrs0ht1NecU7zotkEBUOhg"
-                  alt="Zesty zucchini noodle salad"
-                />
-
-                <span class="time-badge">
-                  <span class="material-symbols-outlined"> schedule </span>
-
-                  15m
-                </span>
-              </div>
-
-              <div class="recipe-content">
-                <h3>Zesty Zoodle Salad</h3>
-
-                <div class="recipe-tags">
-                  <span>Zucchini</span>
-                  <span>Tomato</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="recipe-card">
-              <div class="recipe-image">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiugtzSaEysrDvqSg5NDMMsb4geL4gItEhlXUosXg_roPdS0zaZlRNAanPjfkIwGT2P1080tE1rifoarGulfcOFYWyvqi2wonafVgpFzQZXIQAhyCDVop7FfqBeN5EdwHtGP-ImDrvY8Vq0boxAJ9cwEpvc46-NYrNpw5woyY42jEZnus1EAuJMKNNA5JtJ8-XqlvlOtZDbDCArpnggoBINltWmIdzsIEJTxaIM7Dw0wU9L3t2IJ1Sbg"
-                  alt="Creamy squash soup"
-                />
-
-                <span class="time-badge">
-                  <span class="material-symbols-outlined"> schedule </span>
-
-                  40m
-                </span>
-              </div>
-
-              <div class="recipe-content">
-                <h3>Creamy Squash Soup</h3>
-
-                <div class="recipe-tags">
-                  <span>Squash</span>
-                  <span>Coconut</span>
-                </div>
-              </div>
-            </article>
-          </div>
+    {% for recipe in recipes %}
+    <article class="recipe-card">
+        <div class="recipe-image">
+            <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}">
+            <span class="time-badge">
+                <span class="material-symbols-outlined">schedule</span>
+                {{ recipe.prep_time }}m
+            </span>
         </div>
+
+        <div class="recipe-content">
+            <h3>{{ recipe.title }}</h3>
+            <div class="recipe-tags">
+                {% for tag in recipe.get_tags_list %}
+                    <span>{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+    
+    {% empty %}
+    <p>No trending recipes found. Add some to the database!</p>
+    {% endfor %}
+</div>
       </section>
     </main>
 
