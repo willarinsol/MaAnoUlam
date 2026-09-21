@@ -1,0 +1,172 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MaAnoUlam? - {{recipe.title}}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
+  </head>
+  <body class="recipe-page">
+    <!-- TopNavBar -->
+    <header class="recipe-header">
+      <div>Garden Kitchen</div>
+      <nav>
+        <a href="#">Discover</a>
+        <a href="#">Pantry</a>
+        <a href="#">Saved</a>
+      </nav>
+      <div>
+        <button type="button">
+          <span class="material-symbols-outlined">person</span>
+        </button>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main>
+      <!-- Hero Section -->
+      <section class="recipe-hero hero-clip">
+        <div class="hero-background">
+          <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="recipe-hero-content">
+          <div>
+            <div>
+              <span>
+                <span class="material-symbols-outlined">schedule</span>
+                {{ recipe.prep_time }} mins
+              </span>
+            </div>
+            <h1>{{ recipe.title }}</h1>
+            <p>
+              A hearty, nourishing bowl packed with seasonal roasted vegetables,
+              fluffy quinoa, and a vibrant herb dressing that brings everything
+              together.
+            </p>
+          </div>
+          <button type="button">
+            <span class="material-symbols-outlined">kitchen</span>
+            Save to Pantry
+          </button>
+        </div>
+      </section>
+      <!-- Content Layout -->
+      <section class="recipe-content-layout">
+        <!-- Left Column: Ingredients -->
+        <div class="recipe-sidebar">
+          <!-- In Your Kitchen -->
+          <div>
+            <h3>
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              In Your Kitchen
+            </h3>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                1 cup Quinoa
+              </li>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                2 tbsp Olive Oil
+              </li>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                Salt &amp; Pepper
+              </li>
+            </ul>
+          </div>
+          <!-- Missing Ingredients -->
+          <div>
+            <h3>
+              <span class="material-symbols-outlined">shopping_cart</span>
+              Missing Ingredients
+            </h3>
+            <ul>
+              <li>
+                <span>2 large Sweet Potatoes</span>
+              </li>
+              <li>
+                <span>1 bunch Fresh Parsley</span>
+              </li>
+              <li>
+                <span>1 Lemon</span>
+              </li>
+            </ul>
+            <button type="button">Add Missing to List</button>
+          </div>
+          <!-- Nutrition -->
+          <div>
+            <h3>Nutrition per serving</h3>
+            <div class="nutrition-grid">
+              <div class="flex flex-col">
+                <span>Calories</span>
+                <span>420</span>
+              </div>
+              <div class="flex flex-col">
+                <span>Protein</span>
+                <span>12g</span>
+              </div>
+              <div class="flex flex-col">
+                <span>Carbs</span>
+                <span>54g</span>
+              </div>
+              <div class="flex flex-col">
+                <span>Fats</span>
+                <span>18g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column: Instructions -->
+        <div class="recipe-instructions">
+          <h2>Instructions</h2>
+          <div>
+            {% for step in recipe.get_instructions_list %}
+            <div class="recipe-step">
+              <div>{{ forloop.counter }}</div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  {{ step }}
+                </p>
+              </div>
+            </div>
+            {% empty %}
+            <p>No instructions listed for this recipe.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="recipe-mobile-nav">
+      <a href="#">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+      </a>
+      <a href="#">
+        <span class="material-symbols-outlined">explore</span>
+        <span class="font-label-sm text-label-sm">Discover</span>
+      </a>
+      <a href="#">
+        <span class="material-symbols-outlined">kitchen</span>
+        <span class="font-label-sm text-label-sm">Pantry</span>
+      </a>
+      <a href="#">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>
