@@ -1,0 +1,358 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MaAnoUlam? - {{recipe.title}}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
+  </head>
+  <body class="recipe-page">
+    <!-- TopNavBar -->
+    <header class="recipe-header">
+      <div
+        class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim"
+      >
+        Garden Kitchen
+      </div>
+      <nav class="flex gap-base">
+        <a
+          class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-bold pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200"
+          href="#"
+          >Discover</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-outline font-medium pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200"
+          href="#"
+          >Pantry</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-outline font-medium pb-1 font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200"
+          href="#"
+          >Saved</a
+        >
+      </nav>
+      <div class="flex items-center gap-base">
+        <button
+          class="text-primary dark:text-primary-fixed hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 scale-95 duration-100"
+        >
+          <span class="material-symbols-outlined">person</span>
+        </button>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="flex-grow w-full pb-32 md:pb-stack-lg">
+      <!-- Hero Section -->
+      <section class="recipe-hero hero-clip">
+        <div
+          class="hero-background"
+          data-alt="A vibrant, top-down shot of a beautifully plated roasted vegetable quinoa bowl with a zesty green herb dressing. The dish is styled on rustic ceramics sitting on a natural wood table, bathed in bright, soft morning light. The scene emphasizes fresh, healthy vitality with deep greens, bright oranges, and rich textures. Perfect for a modern minimalist culinary app."
+        ></div>
+        <div class="hero-overlay"></div>
+        <div class="recipe-hero-content">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span
+                class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[16px]">star</span>
+                4.8 (124 reviews)
+              </span>
+              <span
+                class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >schedule</span
+                >
+                {{recipe.prep_time}} mins
+              </span>
+            </div>
+            <h1
+              class="font-display-lg text-display-lg text-on-surface mb-2 shadow-sm"
+            >
+              {{recipe.title}}
+            </h1>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl"
+            >
+              A hearty, nourishing bowl packed with seasonal roasted vegetables,
+              fluffy quinoa, and a vibrant herb dressing that brings everything
+              together.
+            </p>
+          </div>
+          <button
+            class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-md text-label-md flex items-center gap-2 shadow-lg shadow-primary/20 hover:-translate-y-1 transition-transform duration-200"
+          >
+            <span class="material-symbols-outlined">kitchen</span>
+            Save to Pantry
+          </button>
+        </div>
+      </section>
+      <!-- Content Layout -->
+      <section class="recipe-content-layout">
+        <!-- Left Column: Ingredients -->
+        <div class="recipe-sidebar">
+          <!-- In Your Kitchen -->
+          <div
+            class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-high"
+          >
+            <h3
+              class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              In Your Kitchen
+            </h3>
+            <ul class="flex flex-col gap-3">
+              <li
+                class="flex items-center gap-3 font-body-md text-body-md text-on-surface-variant"
+              >
+                <span class="material-symbols-outlined text-primary-container"
+                  >eco</span
+                >
+                1 cup Quinoa
+              </li>
+              <li
+                class="flex items-center gap-3 font-body-md text-body-md text-on-surface-variant"
+              >
+                <span class="material-symbols-outlined text-primary-container"
+                  >eco</span
+                >
+                2 tbsp Olive Oil
+              </li>
+              <li
+                class="flex items-center gap-3 font-body-md text-body-md text-on-surface-variant"
+              >
+                <span class="material-symbols-outlined text-primary-container"
+                  >eco</span
+                >
+                Salt &amp; Pepper
+              </li>
+            </ul>
+          </div>
+          <!-- Missing Ingredients -->
+          <div class="bg-surface-container rounded-xl p-6 shadow-sm">
+            <h3
+              class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-secondary"
+                >shopping_cart</span
+              >
+              Missing Ingredients
+            </h3>
+            <ul class="flex flex-col gap-3 mb-6">
+              <li
+                class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant"
+              >
+                <span>2 large Sweet Potatoes</span>
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              </li>
+              <li
+                class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant"
+              >
+                <span>1 bunch Fresh Parsley</span>
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              </li>
+              <li
+                class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant"
+              >
+                <span>1 Lemon</span>
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              </li>
+            </ul>
+            <button
+              class="w-full bg-transparent border-2 border-primary text-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200"
+            >
+              Add Missing to List
+            </button>
+          </div>
+          <!-- Nutrition -->
+          <div
+            class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/30"
+          >
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-4">
+              Nutrition per serving
+            </h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >Calories</span
+                >
+                <span class="font-headline-md text-headline-md text-on-surface"
+                  >420</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >Protein</span
+                >
+                <span class="font-headline-md text-headline-md text-on-surface"
+                  >12g</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >Carbs</span
+                >
+                <span class="font-headline-md text-headline-md text-on-surface"
+                  >54g</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >Fats</span
+                >
+                <span class="font-headline-md text-headline-md text-on-surface"
+                  >18g</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column: Instructions -->
+        <div class="recipe-instructions">
+          <h2
+            class="font-display-lg text-display-lg text-on-surface mb-stack-md"
+          >
+            Instructions
+          </h2>
+          <div class="flex flex-col gap-stack-md">
+            <div
+              class="flex gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-sm hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-md text-headline-md"
+              >
+                1
+              </div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  <strong class="text-secondary font-semibold">Preheat</strong>
+                  the oven to 400°F (200°C). Wash and cube the sweet potatoes
+                  into 1-inch pieces.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-sm hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-md text-headline-md"
+              >
+                2
+              </div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  <strong class="text-secondary font-semibold">Toss</strong> the
+                  sweet potatoes with 1 tbsp of olive oil, salt, and pepper on a
+                  baking sheet. Roast for 25-30 minutes until tender and golden
+                  at the edges.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-sm hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-md text-headline-md"
+              >
+                3
+              </div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  <strong class="text-secondary font-semibold">Rinse</strong>
+                  the quinoa thoroughly. In a medium pot, combine quinoa with 2
+                  cups of water. Bring to a boil, then reduce heat, cover, and
+                  simmer for 15 minutes.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-sm hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-md text-headline-md"
+              >
+                4
+              </div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  <strong class="text-secondary font-semibold">Blend</strong>
+                  the fresh parsley, remaining olive oil, lemon juice, and a
+                  pinch of salt in a food processor until smooth to create the
+                  herb dressing.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-sm hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-md text-headline-md"
+              >
+                5
+              </div>
+              <div>
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  <strong class="text-secondary font-semibold">Assemble</strong>
+                  the bowls by dividing the cooked quinoa, topping with roasted
+                  sweet potatoes, and drizzling generously with the herb
+                  dressing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="recipe-mobile-nav">
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-high dark:hover:bg-on-surface-variant"
+        href="#"
+      >
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-on-surface-variant"
+        href="#"
+      >
+        <span class="material-symbols-outlined">explore</span>
+        <span class="font-label-sm text-label-sm">Discover</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-high dark:hover:bg-on-surface-variant"
+        href="#"
+      >
+        <span class="material-symbols-outlined">kitchen</span>
+        <span class="font-label-sm text-label-sm">Pantry</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-high dark:hover:bg-on-surface-variant"
+        href="#"
+      >
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>

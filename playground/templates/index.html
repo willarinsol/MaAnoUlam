@@ -111,6 +111,7 @@
 
           <div class="recipe-grid">
     {% for recipe in recipes %}
+    <a href = "{% url 'recipe_detail' recipe.id %}">
     <article class="recipe-card">
         <div class="recipe-image">
             <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}">
@@ -129,7 +130,7 @@
             </div>
         </div>
     </article>
-    
+    </a>
     {% empty %}
     <p>No trending recipes found. Add some to the database!</p>
     {% endfor %}
