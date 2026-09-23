@@ -58,11 +58,11 @@
         </div>
 
         <div class="filter-group">
-          <h3>Meal Type</h3>
+          <h3>Difficulty Level</h3>
           <div class="pill-list">
-            <button class="btn-pill outline-primary">Breakfast</button>
-            <button class="btn-pill primary">Dinner</button>
-            <button class="btn-pill">Lunch</button>
+            <button class="btn-pill outline-primary">Easy</button>
+            <button class="btn-pill primary">Medium</button>
+            <button class="btn-pill">Hard</button>
           </div>
         </div>
 
@@ -110,42 +110,45 @@
         </div>
 
         <!-- Recipe Grid -->
+        <!-- Recipe Grid -->
         <div class="recipe-grid">
-          <!-- Card 1 -->
+          {% for recipe in recipes %}
+          <!-- Dynamic Recipe Card -->
           <article class="recipe-card">
             <div class="card-image-wrapper">
               <div
                 class="card-image"
-                style="
-                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAI0g2iv8sMvWPqluoKTQku9cMJ8HMVh2ZfywUUpCU03Ystg_8uE8Gj4LHa8dhnouebmWigincrLIycMB4Zg1nEseLs-AxhMJkxRwXIWI4EH3Tp5eBpVaIxHoO78Tn78VO5NpLYrScQaM40Xw5Xl8Q1BI_ADFXS_V1_TcnbtAhXYrPOAQ7vChmBQT6qqiTMAGGcrhabvk71Jhz-IRGceCW0PmqxUIbAbilIIeDuZBfczfYjlZKSEuZImw&quot;);
-                "
+                style="background-image: url('{{ recipe.image_url }}');"
               ></div>
               <div class="match-badge high">
                 <span class="dot"></span>
-                <span>3/3 Match</span>
+                <span>don't forget to calculate this to actually Match</span>
               </div>
             </div>
             <div class="card-content">
               <div class="card-header">
-                <h4 class="card-title">Rustic Tomato Basil Pasta</h4>
+                <h4 class="card-title">{{ recipe.title }}</h4>
                 <button class="bookmark-btn">
                   <span class="material-symbols-outlined">bookmark</span>
                 </button>
               </div>
               <div class="card-meta">
-                <span class="meta-tag time"
-                  ><span
-                    class="material-symbols-outlined"
-                    style="font-size: 14px"
-                    >schedule</span
-                  >
-                  25m</span
-                >
-                <span class="meta-tag difficulty">Easy</span>
+                <span class="meta-tag time">
+                  <span class="material-symbols-outlined" style="font-size: 14px">schedule</span>
+                  {{ recipe.prep_time }}m
+                </span>
+                <!-- Dynamically pull the difficulty status -->
+                <span class="meta-tag difficulty">{{ recipe.status }}</span> 
               </div>
-              <button class="btn-block">View Recipe</button>
+              <a href="{% url 'recipe_detail' recipe.id %}" class="btn-block" style="text-align: center; text-decoration: none; display: inline-block; box-sizing: border-box;">View Recipe</a>
             </div>
           </article>
+          {% empty %}
+          <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <p>No recipes found in the database yet!</p>
+          </div>
+          {% endfor %}
+        </div>
 
           <!-- Card 2 -->
         </div>

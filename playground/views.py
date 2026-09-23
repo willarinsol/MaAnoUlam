@@ -23,4 +23,8 @@ def recipe_detail(request, recipe_id):
 
 def recipe_discovery(request):
     recipes_list = Recipe.objects.all()  # Fetch all recipes from the database
-    return render(request, 'recipe_discovery.html')
+
+    context = {
+        'recipes': recipes_list
+    }
+    return render(request, 'recipe_discovery.html', context)
