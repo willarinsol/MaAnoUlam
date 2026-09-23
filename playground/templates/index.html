@@ -67,18 +67,14 @@
                 </span>
               </div>
 
-              <form class="search-box">
+              <form class="search-box" onsubmit="findrecipe(event)">
                 <span class="material-symbols-outlined search-icon">
                   search
                 </span>
 
                 <input type="text" placeholder="Add an ingredient" />
 
-                <button
-                  type="submit"
-                  class="primary-button"
-                  onclick="findrecipe()"
-                >
+                <button type="button" class="primary-button" onclick="findrecipe(event)">
                   Find Recipes
                 </button>
               </form>
