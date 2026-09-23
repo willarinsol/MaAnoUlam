@@ -1,0 +1,163 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MaAnoUlam? - {{recipe.title}}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
+    <link href="{% static 'recipe_detail.css' %}" rel="stylesheet" />
+  </head>
+  <body class="recipe-page">
+    <!-- TopNavBar -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link active" href="{% url 'discover_recipes' %}"
+            >Discover</a
+          >
+          <a class="nav-link" href="#">Pantry</a>
+          <a class="nav-link" href="#">Saved</a>
+        </nav>
+        <button class="profile-btn" type="button">
+          <span class="material-symbols-outlined">person</span>
+        </button>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main>
+      <!-- Hero Section -->
+      <section class="recipe-hero">
+        <div class="hero-background">
+          <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="recipe-hero-content">
+          <div>
+            <div>
+              <span>
+                <span class="material-symbols-outlined">schedule</span>
+                {{ recipe.prep_time }} mins
+              </span>
+              <div>
+                <span> {{ recipe.status }} </span>
+              </div>
+            </div>
+            <h1>{{ recipe.title }}</h1>
+            <p>{{recipe.description}}</p>
+          </div>
+          <button type="button">
+            <span class="material-symbols-outlined">kitchen</span>
+            Save to Pantry
+          </button>
+        </div>
+      </section>
+      <!-- Content Layout -->
+      <section class="recipe-content-layout">
+        <!-- Left Column: Ingredients -->
+        <div class="recipe-sidebar">
+          <!-- In Your Kitchen -->
+          <div>
+            <h3>
+              <span class="material-symbols-outlined">check_circle</span>
+              In Your Kitchen
+            </h3>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                1 cup Quinoa
+              </li>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                2 tbsp Olive Oil
+              </li>
+              <li>
+                <span class="material-symbols-outlined">eco</span>
+                Salt &amp; Pepper
+              </li>
+            </ul>
+          </div>
+          <!-- Nutrition -->
+          <div>
+            <h3>Nutrition per serving</h3>
+            <div class="nutrition-grid">
+              <div>
+                <span>Calories</span>
+                <span>{{ recipe.calories }}</span>
+              </div>
+              <div>
+                <span>Protein</span>
+                <span>{{ recipe.protein }}g</span>
+              </div>
+              <div>
+                <span>Carbs</span>
+                <span>{{ recipe.carbs }}g</span>
+              </div>
+              <div>
+                <span>Fats</span>
+                <span>{{ recipe.fats }}g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column: Instructions -->
+        <div class="recipe-instructions">
+          <h2>Instructions</h2>
+          <div>
+            {% for step in recipe.get_instructions_list %}
+            <div class="recipe-step">
+              <div>{{ forloop.counter }}</div>
+              <div>
+                <p>{{ step }}</p>
+              </div>
+            </div>
+            {% empty %}
+            <p>No instructions listed for this recipe.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="mobile-nav">
+      <a class="mobile-nav-item" href="{% url 'show_homepage' %}">
+        <span class="material-symbols-outlined">home</span>
+        <span>Home</span>
+      </a>
+      <a class="mobile-nav-item active" href="{% url 'discover_recipes' %}">
+        <span class="material-symbols-outlined">explore</span>
+        <span>Discover</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">kitchen</span>
+        <span>Pantry</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">person</span>
+        <span>Profile</span>
+      </a>
+    </nav>
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+        </nav>
+        <p class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

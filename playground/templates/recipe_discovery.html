@@ -1,0 +1,196 @@
+{%load static%}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Garden Kitchen - Discover Recipes</title>
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Quicksand:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+    <link rel="stylesheet" href="{%static 'recipe_discovery.css'%}" />
+  </head>
+  <body>
+    <!-- TopNavBar (Web) -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link active" href="">Discover</a>
+          <a class="nav-link" href="#">Pantry</a>
+          <a class="nav-link" href="#">Saved</a>
+        </nav>
+        <button class="profile-btn">
+          <span class="material-symbols-outlined" type="button">person</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="main-content">
+      <!-- Sidebar Filters -->
+      <aside class="sidebar">
+        <div class="filter-group">
+          <h3>Dietary</h3>
+          <div class="checkbox-list">
+            <label class="checkbox-label">
+              <input type="checkbox" checked />
+              <span>Vegan</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" />
+              <span>Gluten-Free</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" />
+              <span>Dairy-Free</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>Difficulty Level</h3>
+          <div class="pill-list">
+            <button class="btn-pill outline-primary">Easy</button>
+            <button class="btn-pill primary">Medium</button>
+            <button class="btn-pill">Hard</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="checkbox-label">
+            <input type="checkbox" />
+            <span>Ready in < 30 mins</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- Feed Area -->
+      <div class="feed-area">
+        <!-- Active Ingredients Bar -->
+        <div class="ingredients-bar">
+          <span class="bar-label">Pantry Match:</span>
+
+          <span class="ingredient-tag">
+            Tomato
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+          <span class="ingredient-tag">
+            Basil
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+          <span class="ingredient-tag">
+            Garlic
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+
+          <div class="search-container">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input
+              class="search-input"
+              placeholder="Add ingredient..."
+              type="text"
+            />
+          </div>
+        </div>
+
+        <!-- Recipe Grid -->
+        <!-- Recipe Grid -->
+        <div class="recipe-grid">
+          {% for recipe in recipes %}
+          <!-- Dynamic Recipe Card -->
+          <article class="recipe-card">
+            <div class="card-image-wrapper">
+              <div
+                class="card-image"
+                style="background-image: url('{{ recipe.image_url }}');"
+              ></div>
+              <div class="match-badge high">
+                <span class="dot"></span>
+                <span>don't forget to calculate this to actually Match</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-header">
+                <h4 class="card-title">{{ recipe.title }}</h4>
+                <button class="bookmark-btn">
+                  <span class="material-symbols-outlined">bookmark</span>
+                </button>
+              </div>
+              <div class="card-meta">
+                <span class="meta-tag time">
+                  <span class="material-symbols-outlined" style="font-size: 14px">schedule</span>
+                  {{ recipe.prep_time }}m
+                </span>
+                <!-- Dynamically pull the difficulty status -->
+                <span class="meta-tag difficulty">{{ recipe.status }}</span> 
+              </div>
+              <a href="{% url 'recipe_detail' recipe.id %}" class="btn-block" style="text-align: center; text-decoration: none; display: inline-block; box-sizing: border-box;">View Recipe</a>
+            </div>
+          </article>
+          {% empty %}
+          <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <p>No recipes found in the database yet!</p>
+          </div>
+          {% endfor %}
+        </div>
+
+          <!-- Card 2 -->
+        </div>
+      </div>
+    </main>
+
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="mobile-nav">
+      <a class="mobile-nav-item" href="{% url 'show_homepage' %}">
+        <span class="material-symbols-outlined">home</span>
+        <span>Home</span>
+      </a>
+      <a class="mobile-nav-item active" href="#">
+        <span
+          class="material-symbols-outlined"
+          style="font-variation-settings: &quot;FILL&quot; 1"
+          >explore</span
+        >
+        <span>Discover</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">kitchen</span>
+        <span>Pantry</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">person</span>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+    <!-- Footer (Web) -->
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

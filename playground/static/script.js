@@ -24,3 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function showUserPanel() {
+  alert("This part is not yet finished");
+}
