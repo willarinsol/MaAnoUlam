@@ -37,7 +37,7 @@
     <!-- Main Content Canvas -->
     <main>
       <!-- Hero Section -->
-      <section class="recipe-hero hero-clip">
+      <section class="recipe-hero">
         <div class="hero-background">
           <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" />
         </div>
@@ -49,6 +49,9 @@
                 <span class="material-symbols-outlined">schedule</span>
                 {{ recipe.prep_time }} mins
               </span>
+              <div>
+                <span> {{ recipe.status }} </span>
+              </div>
             </div>
             <h1>{{ recipe.title }}</h1>
             <p>{{recipe.description}}</p>

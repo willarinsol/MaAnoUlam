@@ -103,14 +103,14 @@
               <p>Seasonal favorites loved by home cooks this week.</p>
             </div>
 
-            <a href="#" class="view-all">
+            <a href="{%url 'discover_recipes'%}" class="view-all">
               View all
 
               <span class="material-symbols-outlined"> arrow_forward </span>
             </a>
           </div>
 
-          <div class="recipe-grid">
+    <div class="recipe-grid">
     {% for recipe in recipes %}
     <a href = "{% url 'recipe_detail' recipe.id %}">
     <article class="recipe-card">

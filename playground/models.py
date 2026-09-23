@@ -18,6 +18,18 @@ class Recipe(models.Model):
     protein = models.IntegerField(default=0, help_text="in grams")
     carbs = models.IntegerField(default=0, help_text="in grams")
     fats = models.IntegerField(default=0, help_text="in grams")
+
+    #difficulty 
+    class Difficulty(models.TextChoices):
+        EASY = 'Easy', 'Easy'
+        MEDIUM = 'Medium', 'Medium'
+        HARD = 'Hard', 'Hard'
+
+    status = models.CharField(
+        max_length=10,
+        choices=Difficulty.choices,
+        default=Difficulty.EASY
+    )
     
     def __str__(self):
         return self.title
