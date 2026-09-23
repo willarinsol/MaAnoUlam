@@ -1,0 +1,263 @@
+{%load static%}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Garden Kitchen - Discover Recipes</title>
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Quicksand:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+    <link rel="stylesheet" href="{%static 'recipe_discovery.css'%}" />
+  </head>
+  <body>
+    <!-- TopNavBar (Web) -->
+    <header class="site-header">
+      <div class="header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link active" href="">Discover</a>
+          <a class="nav-link" href="#">Pantry</a>
+          <a class="nav-link" href="#">Saved</a>
+        </nav>
+        <button class="profile-btn">
+          <span class="material-symbols-outlined">person</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="main-content">
+      <!-- Sidebar Filters -->
+      <aside class="sidebar">
+        <div class="filter-group">
+          <h3>Dietary</h3>
+          <div class="checkbox-list">
+            <label class="checkbox-label">
+              <input type="checkbox" checked />
+              <span>Vegan</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" />
+              <span>Gluten-Free</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" />
+              <span>Dairy-Free</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>Meal Type</h3>
+          <div class="pill-list">
+            <button class="btn-pill outline-primary">Breakfast</button>
+            <button class="btn-pill primary">Dinner</button>
+            <button class="btn-pill">Lunch</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="checkbox-label">
+            <input type="checkbox" />
+            <span>Ready in < 30 mins</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- Feed Area -->
+      <div class="feed-area">
+        <!-- Active Ingredients Bar -->
+        <div class="ingredients-bar">
+          <span class="bar-label">Pantry Match:</span>
+
+          <span class="ingredient-tag">
+            Tomato
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+          <span class="ingredient-tag">
+            Basil
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+          <span class="ingredient-tag">
+            Garlic
+            <button>
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </span>
+
+          <div class="search-container">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input
+              class="search-input"
+              placeholder="Add ingredient..."
+              type="text"
+            />
+          </div>
+        </div>
+
+        <!-- Recipe Grid -->
+        <div class="recipe-grid">
+          <!-- Card 1 -->
+          <article class="recipe-card">
+            <div class="card-image-wrapper">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAI0g2iv8sMvWPqluoKTQku9cMJ8HMVh2ZfywUUpCU03Ystg_8uE8Gj4LHa8dhnouebmWigincrLIycMB4Zg1nEseLs-AxhMJkxRwXIWI4EH3Tp5eBpVaIxHoO78Tn78VO5NpLYrScQaM40Xw5Xl8Q1BI_ADFXS_V1_TcnbtAhXYrPOAQ7vChmBQT6qqiTMAGGcrhabvk71Jhz-IRGceCW0PmqxUIbAbilIIeDuZBfczfYjlZKSEuZImw&quot;);
+                "
+              ></div>
+              <div class="match-badge high">
+                <span class="dot"></span>
+                <span>3/3 Match</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-header">
+                <h4 class="card-title">Rustic Tomato Basil Pasta</h4>
+                <button class="bookmark-btn">
+                  <span class="material-symbols-outlined">bookmark</span>
+                </button>
+              </div>
+              <div class="card-meta">
+                <span class="meta-tag time"
+                  ><span
+                    class="material-symbols-outlined"
+                    style="font-size: 14px"
+                    >schedule</span
+                  >
+                  25m</span
+                >
+                <span class="meta-tag difficulty">Easy</span>
+              </div>
+              <button class="btn-block">View Recipe</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="recipe-card">
+            <div class="card-image-wrapper">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAbVtcZee_Prb6SZPFwq063sJvSaAwBsn2fP84YKKvEO9_IXysEoE7cB8McRp5JF1p6WTMq7TfizC1wYbXE_BzZFD1gYhm1vbTvwiI0uc6zfOAB274ZVlONz24XwT7S92uSqYE8GAiX0zS4eg1HwiRl23qWYBStBg6idrBregdsb5ho5MLI6aeHgvilqVoUEh1Ghodu8Jx2BdPV7upDaZntJ2QfSn4ee1ieAkMHNC1I40T--tv_cgPuGg&quot;);
+                "
+              ></div>
+              <div class="match-badge med">
+                <span class="dot"></span>
+                <span>2/4 Match</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-header">
+                <h4 class="card-title">Crispy Chickpea Salad</h4>
+                <button class="bookmark-btn">
+                  <span class="material-symbols-outlined">bookmark</span>
+                </button>
+              </div>
+              <div class="card-meta">
+                <span class="meta-tag time"
+                  ><span
+                    class="material-symbols-outlined"
+                    style="font-size: 14px"
+                    >schedule</span
+                  >
+                  15m</span
+                >
+                <span class="meta-tag difficulty">Beginner</span>
+              </div>
+              <button class="btn-block">View Recipe</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="recipe-card">
+            <div class="card-image-wrapper">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAPnkzHeO5ZtNIRbW5m0BnWFXg7KTFe2in28KJDZgKMGdMaSEXrcbCHl_ZNKTckDDVLhSzpmZJQmVqigYZwaeV0Ldr3x414UnJXSrAWsvfgVwbfEszZIZMUOAUaOZVOvTbNk7EDBFOKunsSRGdHjUirzSIv8p8WS0ADsGXcnJhRa_3QKB1V1GO0h43PpRu1j4BGyHV8TDJPkEpwHoHb7UdZG2SdbC_hmFGV1njoB4uzdo35AePyoF_sAw&quot;);
+                "
+              ></div>
+              <div class="match-badge low">
+                <span class="dot"></span>
+                <span>0/5 Match</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-header">
+                <h4 class="card-title">Spring Green Curry</h4>
+                <button class="bookmark-btn">
+                  <span class="material-symbols-outlined">bookmark</span>
+                </button>
+              </div>
+              <div class="card-meta">
+                <span class="meta-tag time"
+                  ><span
+                    class="material-symbols-outlined"
+                    style="font-size: 14px"
+                    >schedule</span
+                  >
+                  40m</span
+                >
+                <span class="meta-tag difficulty">Medium</span>
+              </div>
+              <button class="btn-block">View Recipe</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <!-- BottomNavBar (Mobile) -->
+    <nav class="mobile-nav">
+      <a class="mobile-nav-item" href="{% url 'show_homepage' %}">
+        <span class="material-symbols-outlined">home</span>
+        <span>Home</span>
+      </a>
+      <a class="mobile-nav-item active" href="#">
+        <span
+          class="material-symbols-outlined"
+          style="font-variation-settings: &quot;FILL&quot; 1"
+          >explore</span
+        >
+        <span>Discover</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">kitchen</span>
+        <span>Pantry</span>
+      </a>
+      <a class="mobile-nav-item" href="#">
+        <span class="material-symbols-outlined">person</span>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+    <!-- Footer (Web) -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

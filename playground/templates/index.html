@@ -21,18 +21,18 @@
   </head>
 
   <body>
-    <header class="top-header">
-      <div class="container header-content">
-        <a href="#" class="logo"> Ma Ano Ulam? </a>
+    <header class="site-header" id="top">
+      <div class="container header-container">
+        <a href="#top" class="logo">MaAnoUlam?</a>
 
-        <nav class="desktop-nav">
-          <a href="#" class="active">Discover</a>
-          <a href="#">Pantry</a>
-          <a href="#">Saved</a>
+        <nav class="nav-links">
+          <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
+          <a class="nav-link" href="#">Pantry</a>
+          <a class="nav-link" href="#">Saved</a>
         </nav>
 
-        <button class="icon-button" type="button">
-          <span class="material-symbols-outlined"> person </span>
+        <button class="profile-btn" type="button">
+          <span class="material-symbols-outlined">person</span>
         </button>
       </div>
     </header>
@@ -139,36 +139,36 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
       <div class="container footer-content">
-        <a href="#" class="logo"> Ma Ano Ulam? </a>
+        <a href="#" class="logo">MaAnoUlam?</a>
 
-        <nav class="footer-nav">
+        <nav class="footer-links">
           <a href="#">About Us</a>
           <a href="#">Privacy Policy</a>
         </nav>
 
-        <p>© 2026 Ma Ano Ulam? Fresh Vitality for every home cook.</p>
+        <p class="footer-copyright">© 2026 MaAnoUlam? Fresh Vitality for every home cook.</p>
       </div>
     </footer>
 
     <nav class="mobile-nav">
-      <a href="#">
+      <a class="mobile-nav-item active" href="#top">
         <span class="material-symbols-outlined"> home </span>
         Home
       </a>
 
-      <a href="#" class="mobile-active">
+      <a class="mobile-nav-item" href="{% url 'discover_recipes' %}">
         <span class="material-symbols-outlined"> explore </span>
         Discover
       </a>
 
-      <a href="#">
+      <a class="mobile-nav-item" href="#">
         <span class="material-symbols-outlined"> kitchen </span>
         Pantry
       </a>
 
-      <a href="#">
+      <a class="mobile-nav-item" href="#">
         <span class="material-symbols-outlined"> person </span>
         Profile
       </a>

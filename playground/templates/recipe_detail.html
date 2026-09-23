@@ -19,15 +19,17 @@
   </head>
   <body class="recipe-page">
     <!-- TopNavBar -->
-    <header class="recipe-header">
-      <div>MaAnoUlam?</div>
-      <nav>
-        <a href="#">Discover</a>
-        <a href="#">Pantry</a>
-        <a href="#">Saved</a>
-      </nav>
-      <div>
-        <button type="button">
+    <header class="site-header">
+      <div class="container header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link active" href="{% url 'discover_recipes' %}"
+            >Discover</a
+          >
+          <a class="nav-link" href="#">Pantry</a>
+          <a class="nav-link" href="#">Saved</a>
+        </nav>
+        <button class="profile-btn" type="button">
           <span class="material-symbols-outlined">person</span>
         </button>
       </div>
@@ -124,23 +126,35 @@
       </section>
     </main>
     <!-- BottomNavBar (Mobile) -->
-    <nav class="recipe-mobile-nav">
-      <a href="#">
+    <nav class="mobile-nav">
+      <a class="mobile-nav-item" href="{% url 'show_homepage' %}">
         <span class="material-symbols-outlined">home</span>
         <span>Home</span>
       </a>
-      <a href="#">
+      <a class="mobile-nav-item active" href="{% url 'discover_recipes' %}">
         <span class="material-symbols-outlined">explore</span>
         <span>Discover</span>
       </a>
-      <a href="#">
+      <a class="mobile-nav-item" href="#">
         <span class="material-symbols-outlined">kitchen</span>
         <span>Pantry</span>
       </a>
-      <a href="#">
+      <a class="mobile-nav-item" href="#">
         <span class="material-symbols-outlined">person</span>
         <span>Profile</span>
       </a>
     </nav>
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+        </nav>
+        <p class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>

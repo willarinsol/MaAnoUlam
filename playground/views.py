@@ -20,3 +20,6 @@ def recipe_detail(request, recipe_id):
         'recipe': recipe
     }
     return render(request, 'recipe_detail.html', context)
+
+def recipe_discovery(request):
+    return render(request, 'recipe_discovery.html')
