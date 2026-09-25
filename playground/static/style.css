@@ -215,3 +215,35 @@ input {
     color: var(--primary-dark);
   }
 }
+/* Suggestion Dropdown Styling */
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(
+    100% - 140px
+  ); /* Adjust based on your Find Recipes button width */
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+  padding: 0;
+  margin-top: 4px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.suggestion-list li {
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--text);
+  border-bottom: 1px solid var(--surface-container);
+}
+
+.suggestion-list li:hover {
+  background: var(--surface-light);
+  color: var(--primary);
+}

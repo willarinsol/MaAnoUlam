@@ -105,3 +105,83 @@ document.addEventListener("DOMContentLoaded", () => {
 function showUserPanel() {
   alert("This part is not yet finished");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("ingredient-search");
+  const suggestionList = document.getElementById("suggestion-list");
+  const selectedTagsContainer = document.getElementById(
+    "selected-tags-container",
+  );
+
+  // Track selected ingredients to avoid duplicates
+  const selectedIngredients = [];
+
+  // 1. Filter and show suggestions as user types
+  if (searchInput && suggestionList && typeof recipeTags !== "undefined") {
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      suggestionList.innerHTML = "";
+
+      if (query) {
+        const filteredTags = recipeTags.filter(
+          (tag) => tag.includes(query) && !selectedIngredients.includes(tag),
+        );
+
+        if (filteredTags.length > 0) {
+          suggestionList.style.display = "block";
+          filteredTags.forEach((tag) => {
+            const li = document.createElement("li");
+            li.textContent = tag;
+            li.onclick = () => addTag(tag);
+            suggestionList.appendChild(li);
+          });
+        } else {
+          suggestionList.style.display = "none";
+        }
+      } else {
+        suggestionList.style.display = "none";
+      }
+    });
+
+    // Hide dropdown if clicked outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-box")) {
+        suggestionList.style.display = "none";
+      }
+    });
+  }
+
+  // 2. Add tag to the container matching your existing CSS structure
+  function addTag(tag) {
+    if (!selectedIngredients.includes(tag)) {
+      selectedIngredients.push(tag);
+
+      const tagSpan = document.createElement("span");
+      tagSpan.className = "ingredient-tag";
+      tagSpan.innerHTML = `
+        ${tag}
+        <button type="button" onclick="removeTag(this, '${tag}')">
+           <span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+        </button>
+      `;
+      selectedTagsContainer.appendChild(tagSpan);
+    }
+
+    searchInput.value = "";
+    suggestionList.style.display = "none";
+    searchInput.focus();
+  }
+
+  // 3. Make removeTag available globally
+  window.removeTag = function (btnElement, tagToRemove) {
+    const index = selectedIngredients.indexOf(tagToRemove);
+    if (index > -1) {
+      selectedIngredients.splice(index, 1);
+    }
+    const tagContainer = btnElement.closest(".ingredient-tag");
+    tagContainer.classList.add("fade-out");
+    setTimeout(() => {
+      tagContainer.remove();
+    }, 200);
+  };
+});
