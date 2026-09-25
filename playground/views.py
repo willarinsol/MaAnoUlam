@@ -1,14 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Recipe
 from django.db.models import Q
+import json
+
 
 def show_homepage(request):
-    # Fetch the latest 4 recipes from the database
-    trending_recipes = Recipe.objects.all()[:4] 
+    recipes = Recipe.objects.all()
+    trending_recipes = recipes[:4]
     
-    # Pass them to the template
+    # Extract unique tags for the search suggestions
+    unique_tags = set()
+    for r in recipes:
+        for tag in r.get_tags_list():
+            unique_tags.add(tag.lower())
+            
     context = {
-        'recipes': trending_recipes
+        'recipes': trending_recipes,
+        'all_tags_json': json.dumps(list(unique_tags)) # Pass as JSON string
     }
     return render(request, 'index.html', context)
 

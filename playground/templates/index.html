@@ -50,35 +50,24 @@
             </p>
 
             <div class="ingredient-box">
-              <div class="ingredient-tags">
-                <span class="ingredient-tag">
-                  Tomato
-                  <button type="button">x</button>
-                </span>
-
-                <span class="ingredient-tag">
-                  Chicken
-                  <button type="button">×</button>
-                </span>
-
-                <span class="ingredient-tag">
-                  Basil
-                  <button type="button">×</button>
-                </span>
+              <div class="ingredient-tags" id="selected-tags-container">
+                <!-- Selected tags will be injected here by JS -->
               </div>
-
-              <form class="search-box" onsubmit="findrecipe(event)">
-                <span class="material-symbols-outlined search-icon">
-                  search
-                </span>
-
-                <input type="text" placeholder="Add an ingredient" />
-
-                <button type="button" class="primary-button" onclick="findrecipe(event)">
-                  Find Recipes
-                </button>
+              
+              <form class="search-box" style="position: relative;" onsubmit="findrecipe(event)">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input type="text" id="ingredient-search" placeholder="Add an ingredient..." autocomplete="off" />
+                <button type="button" class="primary-button" onclick="findrecipe(event)">Find Recipes</button>
+                
+                <!-- ADD THIS: Suggestion Dropdown -->
+                <ul id="suggestion-list" class="suggestion-list"></ul>
               </form>
             </div>
+
+            <!-- ADD THIS: Safely load backend tags into a JS variable -->
+            
+              
+            
           </div>
 
           <div class="hero-image">
@@ -169,6 +158,9 @@
         Profile
       </a>
     </nav>
+    <script>
+    const recipeTags = {{ all_tags_json|safe }};
+    </script>
     <script src="{% static 'script.js'%}"></script>
   </body>
 </html>
