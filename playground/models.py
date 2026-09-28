@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # 1. Create the new Ingredient model
 class Ingredient(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -44,3 +44,19 @@ class Recipe(models.Model):
         
     def get_instructions_list(self):
         return [inst.strip() for inst in self.instructions.split('\n') if inst.strip()]
+
+
+class Collection(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="collections")
+    name = models.CharField(max_length=120)
+    recipes = models.ManyToManyField('Recipe', blank=True, related_name="collections")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        # Prevent duplicate collection names per user
+        unique_together = ('user', 'name')
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.name}"
