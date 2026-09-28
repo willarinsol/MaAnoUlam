@@ -26,8 +26,7 @@
         <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
         <nav class="nav-links">
           <a class="nav-link active" href="">Discover</a>
-          <a class="nav-link" href="#">Pantry</a>
-          <a class="nav-link" href="#">Saved</a>
+          <a class="nav-link" href="#">My Saved Recipes</a>
         </nav>
         <button class="profile-btn">
           <span class="material-symbols-outlined" type="button">person</span>
@@ -40,24 +39,6 @@
       <!-- Sidebar Filters -->
       <aside class="sidebar">
         <div class="filter-group">
-          <h3>Dietary</h3>
-          <div class="checkbox-list">
-            <label class="checkbox-label">
-              <input type="checkbox" checked />
-              <span>Vegan</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" />
-              <span>Gluten-Free</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" />
-              <span>Dairy-Free</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="filter-group">
           <h3>Difficulty Level</h3>
           <div class="pill-list">
             <button class="btn-pill outline-primary">Easy</button>
@@ -67,9 +48,21 @@
         </div>
 
         <div class="filter-group">
+          <h3>Dish Type</h3>
+          <div class="pill-list">
+            <button class="btn-pill">Ulam</button>
+            <button class="btn-pill">Non-Ulam</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
           <label class="checkbox-label">
             <input type="checkbox" />
             <span>Ready in < 30 mins</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" />
+            <span>Ready in < 1 Hour</span>
           </label>
         </div>
       </aside>
@@ -89,14 +82,18 @@
           </span>
           {% endfor %}
 
-          <div class="search-container">
+          <!-- Inside the feed-area ingredients-bar -->
+          <div class="search-container" style="position: relative">
             <span class="material-symbols-outlined search-icon">search</span>
             <input
               id="discover-search-input"
               class="search-input"
               placeholder="Add ingredient and press Enter..."
               type="text"
+              autocomplete="off"
             />
+            <!-- ADD THIS: Suggestion Dropdown -->
+            <ul id="discover-suggestion-list" class="suggestion-list"></ul>
           </div>
         </div>
 
@@ -110,25 +107,10 @@
                 class="card-image"
                 style="background-image: url('{{ recipe.image_url }}');"
               ></div>
-              <!-- Dynamic Match Badge Logic -->
-              {% if active_ingredients %}
-                {% if recipe.match_count == recipe.total_count %}
-                  <div class="match-badge high">
-                    <span class="dot"></span>
-                    <span>100% Match (You have everything!)</span>
-                  </div>
-                {% elif recipe.match_count >= recipe.total_count|add:"-2" %}
-                  <div class="match-badge med">
-                    <span class="dot"></span>
-                    <span>Missing 1-2 Ingredients</span>
-                  </div>
-                {% else %}
-                  <div class="match-badge low">
-                    <span class="dot"></span>
-                    <span>Missing several ingredients</span>
-                  </div>
-                {% endif %}
-              {% endif %}
+              <div class="match-badge high">
+                <span class="dot"></span>
+                <span>don't forget to calculate this to actually Match</span>
+              </div>
             </div>
             <div class="card-content">
               <div class="card-header">
@@ -148,13 +130,7 @@
                 </span>
                 <!-- Dynamically pull the difficulty status -->
                 <span class="meta-tag difficulty">{{ recipe.status }}</span>
-                
-                <!-- Dynamically pull the recipe tags -->
-                {% for tag in recipe.get_tags_list %}
-                <span class="meta-tag tag">{{ tag }}</span>
-                {% endfor %}
               </div>
-              
               <a
                 href="{% url 'recipe_detail' recipe.id %}"
                 class="btn-block"
@@ -204,7 +180,6 @@
       </a>
     </nav>
 
-    <!-- Footer (Web) -->
     <footer class="site-footer">
       <div class="container footer-content">
         <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
@@ -217,6 +192,9 @@
         </div>
       </div>
     </footer>
+    <script>
+      const recipeTags = {{ all_tags_json|safe }};
+    </script>
     <script src="{% static 'script.js' %}"></script>
   </body>
 </html>
