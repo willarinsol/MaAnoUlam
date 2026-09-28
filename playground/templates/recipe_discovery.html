@@ -110,10 +110,25 @@
                 class="card-image"
                 style="background-image: url('{{ recipe.image_url }}');"
               ></div>
-              <div class="match-badge high">
-                <span class="dot"></span>
-                <span>don't forget to calculate this to actually Match</span>
-              </div>
+              <!-- Dynamic Match Badge Logic -->
+              {% if active_ingredients %}
+                {% if recipe.match_count == recipe.total_count %}
+                  <div class="match-badge high">
+                    <span class="dot"></span>
+                    <span>100% Match (You have everything!)</span>
+                  </div>
+                {% elif recipe.match_count >= recipe.total_count|add:"-2" %}
+                  <div class="match-badge med">
+                    <span class="dot"></span>
+                    <span>Missing 1-2 Ingredients</span>
+                  </div>
+                {% else %}
+                  <div class="match-badge low">
+                    <span class="dot"></span>
+                    <span>Missing several ingredients</span>
+                  </div>
+                {% endif %}
+              {% endif %}
             </div>
             <div class="card-content">
               <div class="card-header">
@@ -133,7 +148,13 @@
                 </span>
                 <!-- Dynamically pull the difficulty status -->
                 <span class="meta-tag difficulty">{{ recipe.status }}</span>
+                
+                <!-- Dynamically pull the recipe tags -->
+                {% for tag in recipe.get_tags_list %}
+                <span class="meta-tag tag">{{ tag }}</span>
+                {% endfor %}
               </div>
+              
               <a
                 href="{% url 'recipe_detail' recipe.id %}"
                 class="btn-block"

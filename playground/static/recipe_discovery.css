@@ -430,3 +430,9 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.meta-tag.tag{
+  background-color: rgba(74, 222, 128, 0.2); /* Light green matching your theme */
+  color: var(--primary);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}

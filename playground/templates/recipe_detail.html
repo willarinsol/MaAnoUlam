@@ -70,21 +70,17 @@
           <div>
             <h3>
               <span class="material-symbols-outlined">check_circle</span>
-              In Your Kitchen
+              Ingredients List
             </h3>
             <ul>
+              {% for ingredient in recipe.get_ingredients_list %}
               <li>
                 <span class="material-symbols-outlined">eco</span>
-                1 cup Quinoa
+                {{ ingredient }}
               </li>
-              <li>
-                <span class="material-symbols-outlined">eco</span>
-                2 tbsp Olive Oil
-              </li>
-              <li>
-                <span class="material-symbols-outlined">eco</span>
-                Salt &amp; Pepper
-              </li>
+              {% empty %}
+              <li>No ingredients listed.</li>
+              {% endfor %}
             </ul>
           </div>
           <!-- Nutrition -->
