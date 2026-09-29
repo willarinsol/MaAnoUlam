@@ -27,14 +27,24 @@
 
         <nav class="nav-links">
           <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
-          
           <a class="nav-link" href="{% url 'collections_view' %}">My Saved Recipes</a>
         </nav>
-
+        
         {% if request.user.is_authenticated %}
-    <a href="{% url 'collections_view' %}" class="profile-btn" title="{{ request.user.username }}">
-        <span class="material-symbols-outlined">person</span>
-    </a>
+        <div class="profile-dropdown-container">
+            <button class="profile-btn" type="button">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+            <div class="profile-dropdown-menu">
+                <span class="dropdown-user">Hi, {{ request.user.username }}</span>
+            <a href="{% url 'collections_view' %}">
+                <span class="material-symbols-outlined" style="font-size: 18px; margin-right: 4px;">bookmark</span> Saved
+            </a>
+            <a href="{% url 'logout' %}" class="logout-link">
+                <span class="material-symbols-outlined" style="font-size: 18px; margin-right: 4px;">logout</span> Log Out
+            </a>
+        </div>
+    </div>
 {% else %}
     <a href="{% url 'login' %}" class="primary-button" style="padding: 6px 14px; text-decoration: none;">Log In</a>
 {% endif %}

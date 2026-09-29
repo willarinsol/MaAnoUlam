@@ -30,9 +30,39 @@
             >My Saved Recipes</a
           >
         </nav>
-        <button class="profile-btn" type="button">
-          <span class="material-symbols-outlined">person</span>
-        </button>
+        {% if request.user.is_authenticated %}
+        <div class="profile-dropdown-container">
+          <button class="profile-btn" type="button">
+            <span class="material-symbols-outlined">person</span>
+          </button>
+          <div class="profile-dropdown-menu">
+            <span class="dropdown-user">Hi, {{ request.user.username }}</span>
+            <a href="{% url 'collections_view' %}">
+              <span
+                class="material-symbols-outlined"
+                style="font-size: 18px; margin-right: 4px"
+                >bookmark</span
+              >
+              Saved
+            </a>
+            <a href="{% url 'logout' %}" class="logout-link">
+              <span
+                class="material-symbols-outlined"
+                style="font-size: 18px; margin-right: 4px"
+                >logout</span
+              >
+              Log Out
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <a
+          href="{% url 'login' %}"
+          class="primary-button"
+          style="padding: 6px 14px; text-decoration: none"
+          >Log In</a
+        >
+        {% endif %}
       </div>
     </header>
     <!-- Main Content Canvas -->
@@ -57,10 +87,6 @@
             <h1>{{ recipe.title }}</h1>
             <p>{{recipe.description}}</p>
           </div>
-          <button type="button">
-            <span class="material-symbols-outlined">kitchen</span>
-            Save to Pantry
-          </button>
         </div>
       </section>
       <!-- Content Layout -->
@@ -87,6 +113,16 @@
           <!-- Nutrition -->
           <div>
             <h3>Nutrition per serving</h3>
+            <p
+              style="
+                color: var(--text-muted);
+                margin-bottom: 16px;
+                font-size: 14px;
+              "
+            >
+              This recipe makes <strong>{{ recipe.servings }}</strong> serving{{
+              recipe.servings|pluralize }}.
+            </p>
             <div class="nutrition-grid">
               <div>
                 <span>Calories</span>
