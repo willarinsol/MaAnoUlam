@@ -219,3 +219,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function updateFilter(paramKey, paramValue) {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Toggle logic: If clicking the same filter, remove it. Otherwise, set it.
+    if (urlParams.get(paramKey) === paramValue) {
+        urlParams.delete(paramKey);
+    } else {
+        urlParams.set(paramKey, paramValue);
+    }
+    
+    // Reload the page with the new query string
+    window.location.search = urlParams.toString();
+}

@@ -41,6 +41,9 @@ def recipe_detail(request, recipe_id):
 
 def recipe_discovery(request):
     query = request.GET.get('ingredients', '')
+    difficulty = request.GET.get('difficulty', '') # Added: Get difficulty
+    max_time = request.GET.get('max_time', '')     # Added: Get max prep time
+
     recipes_list = Recipe.objects.all()
     
     # Extract unique tags for the autocomplete suggestions
@@ -57,6 +60,16 @@ def recipe_discovery(request):
             q_objects |= Q(ingredients_list__icontains=ingredient) | Q(tags__icontains=ingredient)
             
         recipes_list = recipes_list.filter(q_objects).distinct()
+
+    context = {
+        'recipes': recipes_list,
+        'active_ingredients': active_ingredients,
+        'all_tags_json': json.dumps(list(unique_tags)),
+        # Pass active filters back so the template can highlight them
+        'active_difficulty': difficulty, 
+        'active_time': max_time,
+    }
+    return render(request, 'recipe_discovery.html', context)
         
     context = {
         'recipes': recipes_list,
