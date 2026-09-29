@@ -248,25 +248,38 @@ input {
   color: var(--primary);
 }
 
-/* Profile Dropdown Panel */
+/* Profile Dropdown Container */
 .profile-dropdown-container {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+/* Invisible bridge to prevent the menu from disappearing when hovering */
+.profile-dropdown-container::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 15px;
 }
 
 .profile-dropdown-menu {
   display: none;
   position: absolute;
   right: 0;
-  top: 120%;
+  top: calc(
+    100% + 10px
+  ); /* Pushes it down slightly for visual breathing room */
   background-color: var(--surface);
-  min-width: 160px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Matches your existing card shadows */
   border-radius: var(--radius);
   border: 1px solid var(--border);
   z-index: 1000;
-  overflow: hidden;
   flex-direction: column;
+  padding: 8px 0; /* Standardized spacing */
 }
 
 /* Show dropdown smoothly on hover */
@@ -275,20 +288,20 @@ input {
 }
 
 .dropdown-user {
-  padding: 12px 16px;
+  padding: 8px 16px;
   font-size: 14px;
   font-weight: 700;
-  color: var(--text);
-  border-bottom: 1px solid var(--surface-container);
-  background: var(--surface-light);
+  color: var(--primary); /* Uses your core brand color */
+  border-bottom: 1px solid var(--surface-high);
+  margin-bottom: 4px;
 }
 
 .profile-dropdown-menu a {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 16px;
   text-decoration: none;
-  color: var(--text-muted);
+  color: var(--text-muted); /* Matches your standard nav links */
   font-size: 14px;
   font-weight: 600;
   transition:
@@ -297,15 +310,14 @@ input {
 }
 
 .profile-dropdown-menu a:hover {
-  background-color: var(--surface-container);
+  background-color: var(--surface-light);
   color: var(--primary);
 }
 
 .profile-dropdown-menu a.logout-link {
   color: #ba1a1a;
-  border-top: 1px solid var(--surface-container);
 }
 
 .profile-dropdown-menu a.logout-link:hover {
-  background-color: rgba(186, 26, 26, 0.1);
+  background-color: rgba(186, 26, 26, 0.05);
 }

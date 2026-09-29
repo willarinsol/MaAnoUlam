@@ -27,18 +27,16 @@
 
         <nav class="nav-links">
           <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
-          
           <a class="nav-link" href="{% url 'collections_view' %}">My Saved Recipes</a>
         </nav>
-
+        
         {% if request.user.is_authenticated %}
-    {% if request.user.is_authenticated %}
-    <div class="profile-dropdown-container">
-        <button class="profile-btn" type="button">
-            <span class="material-symbols-outlined">person</span>
-        </button>
-        <div class="profile-dropdown-menu">
-            <span class="dropdown-user">Hi, {{ request.user.username }}</span>
+        <div class="profile-dropdown-container">
+            <button class="profile-btn" type="button">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+            <div class="profile-dropdown-menu">
+                <span class="dropdown-user">Hi, {{ request.user.username }}</span>
             <a href="{% url 'collections_view' %}">
                 <span class="material-symbols-outlined" style="font-size: 18px; margin-right: 4px;">bookmark</span> Saved
             </a>
