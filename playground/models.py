@@ -25,6 +25,8 @@ class Recipe(models.Model):
     protein = models.IntegerField(default=0, help_text="in grams")
     carbs = models.IntegerField(default=0, help_text="in grams")
     fats = models.IntegerField(default=0, help_text="in grams")
+
+    servings = models.IntegerField(default=1, help_text="Number of servings")
     
     class Difficulty(models.TextChoices):
         EASY = 'Easy', 'Easy'
