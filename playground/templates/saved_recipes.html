@@ -1,0 +1,163 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <title>Saved Recipes - MaAnoUlam?</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'recipe_discovery.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Quicksand:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="{% url 'show_homepage' %}" class="logo">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
+          <a class="nav-link active" href="{% url 'collections_view' %}"
+            >Saved</a
+          >
+        </nav>
+        <a
+          href="{% url 'logout' %}"
+          class="primary-button"
+          style="padding: 6px 14px"
+          >Log Out</a
+        >
+      </div>
+    </header>
+
+    <main class="main-content" style="flex-direction: column">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h2>My Collections</h2>
+        <form
+          action="{% url 'create_collection' %}"
+          method="POST"
+          style="display: flex; gap: 8px"
+        >
+          {% csrf_token %}
+          <input
+            type="text"
+            name="name"
+            placeholder="New collection name..."
+            required
+            class="search-input"
+            style="padding: 8px 12px; width: 220px"
+          />
+          <button type="submit" class="btn-pill primary">+ Add</button>
+        </form>
+      </div>
+
+      {% for collection in collections %}
+      <div
+        class="collection-section"
+        style="
+          margin-top: 32px;
+          background: white;
+          padding: 24px;
+          border-radius: 12px;
+          border: 1px solid var(--border);
+        "
+      >
+        <!-- Renameable header -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+          "
+        >
+          <form
+            action="{% url 'rename_collection' collection.id %}"
+            method="POST"
+            style="display: flex; align-items: center; gap: 8px"
+          >
+            {% csrf_token %}
+            <input
+              type="text"
+              name="new_name"
+              value="{{ collection.name }}"
+              style="
+                font-size: 20px;
+                font-weight: 700;
+                border: 1px dashed transparent;
+                background: transparent;
+                padding: 4px;
+              "
+              onfocus="this.style.borderColor = 'var(--primary)'"
+              onblur="this.style.borderColor = 'transparent'"
+            />
+            <button
+              type="submit"
+              class="btn-pill"
+              style="font-size: 12px; padding: 4px 10px"
+            >
+              Rename
+            </button>
+          </form>
+          <form
+            action="{% url 'delete_collection' collection.id %}"
+            method="POST"
+            onsubmit="return confirm('Delete this collection?');"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="color: #ba1a1a; font-size: 14px; font-weight: 600"
+            >
+              Delete Collection
+            </button>
+          </form>
+        </div>
+
+        <!-- Collection Recipe Grid -->
+        <div class="recipe-grid">
+          {% for recipe in collection.recipes.all %}
+          <article class="recipe-card">
+            <div class="card-image-wrapper">
+              <div
+                class="card-image"
+                style="background-image: url('{{ recipe.image_url }}');"
+              ></div>
+            </div>
+            <div class="card-content">
+              <h4 class="card-title">{{ recipe.title }}</h4>
+              <div class="card-meta">
+                <span class="meta-tag time">{{ recipe.prep_time }}m</span>
+                <span class="meta-tag difficulty">{{ recipe.status }}</span>
+              </div>
+              <a
+                href="{% url 'recipe_detail' recipe.id %}"
+                class="btn-block"
+                style="text-align: center"
+                >View</a
+              >
+            </div>
+          </article>
+          {% empty %}
+          <p style="color: var(--text-muted); font-size: 14px">
+            No recipes in this collection yet.
+          </p>
+          {% endfor %}
+        </div>
+      </div>
+      {% empty %}
+      <p>You haven't created any collections yet.</p>
+      {% endfor %}
+    </main>
+  </body>
+</html>

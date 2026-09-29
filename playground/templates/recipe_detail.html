@@ -26,8 +26,9 @@
           <a class="nav-link active" href="{% url 'discover_recipes' %}"
             >Discover</a
           >
-          <a class="nav-link" href="#">Pantry</a>
-          <a class="nav-link" href="#">Saved</a>
+          <a class="nav-link" href="{% url 'collections_view' %}"
+            >My Saved Recipes</a
+          >
         </nav>
         <button class="profile-btn" type="button">
           <span class="material-symbols-outlined">person</span>
