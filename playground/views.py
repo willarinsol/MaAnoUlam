@@ -32,9 +32,20 @@ def recipe_detail(request, recipe_id):
 
 def recipe_discovery(request):
     query = request.GET.get('ingredients', '')
+    difficulty = request.GET.get('difficulty', '') # Added: Get difficulty
+    max_time = request.GET.get('max_time', '')     # Added: Get max prep time
+
     recipes_list = Recipe.objects.all()
-    
-    # 1. Extract unique tags for the autocomplete suggestions
+
+    # Apply Difficulty Filter (matches the 'status' field in your models.py)
+    if difficulty:
+        recipes_list = recipes_list.filter(status__iexact=difficulty)
+
+    # Apply Time Filter (matches 'prep_time' in your models.py)
+    if max_time and max_time.isdigit():
+        recipes_list = recipes_list.filter(prep_time__lte=int(max_time))
+
+    # Extract unique tags for the autocomplete suggestions
     unique_tags = set()
     for r in Recipe.objects.all():
         for tag in r.get_tags_list():
@@ -43,12 +54,21 @@ def recipe_discovery(request):
     # Create a list of active ingredients
     active_ingredients = [i.strip() for i in query.split(',') if i.strip()]
     if active_ingredients:
-        from django.db.models import Q
         q_objects = Q()
         for ingredient in active_ingredients:
             q_objects |= Q(ingredients_list__icontains=ingredient) | Q(tags__icontains=ingredient)
             
         recipes_list = recipes_list.filter(q_objects).distinct()
+
+    context = {
+        'recipes': recipes_list,
+        'active_ingredients': active_ingredients,
+        'all_tags_json': json.dumps(list(unique_tags)),
+        # Pass active filters back so the template can highlight them
+        'active_difficulty': difficulty, 
+        'active_time': max_time,
+    }
+    return render(request, 'recipe_discovery.html', context)
         
     context = {
         'recipes': recipes_list,

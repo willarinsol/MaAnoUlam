@@ -38,34 +38,27 @@
     <main class="main-content">
       <!-- Sidebar Filters -->
       <aside class="sidebar">
-        <div class="filter-group">
-          <h3>Difficulty Level</h3>
-          <div class="pill-list">
-            <button class="btn-pill outline-primary">Easy</button>
-            <button class="btn-pill primary">Medium</button>
-            <button class="btn-pill">Hard</button>
-          </div>
-        </div>
+  <div class="filter-group">
+    <h3>Difficulty Level</h3>
+    <div class="pill-list">
+      <!-- Add onclick events. The 'primary' class should toggle based on context -->
+      <button class="btn-pill {% if active_difficulty == 'Easy' %}primary{% endif %}" onclick="updateFilter('difficulty', 'Easy')">Easy</button>
+      <button class="btn-pill {% if active_difficulty == 'Medium' %}primary{% endif %}" onclick="updateFilter('difficulty', 'Medium')">Medium</button>
+      <button class="btn-pill {% if active_difficulty == 'Hard' %}primary{% endif %}" onclick="updateFilter('difficulty', 'Hard')">Hard</button>
+    </div>
+  </div>
 
-        <div class="filter-group">
-          <h3>Dish Type</h3>
-          <div class="pill-list">
-            <button class="btn-pill">Ulam</button>
-            <button class="btn-pill">Non-Ulam</button>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <label class="checkbox-label">
-            <input type="checkbox" />
-            <span>Ready in < 30 mins</span>
-          </label>
-          <label class="checkbox-label">
-            <input type="checkbox" />
-            <span>Ready in < 1 Hour</span>
-          </label>
-        </div>
-      </aside>
+  <div class="filter-group">
+    <label class="checkbox-label">
+      <input type="checkbox" onchange="updateFilter('max_time', '30')" {% if active_time == '30' %}checked{% endif %} />
+      <span>Ready in &lt; 30 mins</span>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" onchange="updateFilter('max_time', '60')" {% if active_time == '60' %}checked{% endif %} />
+      <span>Ready in &lt; 1 Hour</span>
+    </label>
+  </div>
+</aside>
 
       <!-- Feed Area (ADDED BACK HERE) -->
       <div class="feed-area">
