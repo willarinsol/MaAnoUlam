@@ -221,15 +221,167 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function updateFilter(paramKey, paramValue) {
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Toggle logic: If clicking the same filter, remove it. Otherwise, set it.
-    if (urlParams.get(paramKey) === paramValue) {
-        urlParams.delete(paramKey);
-    } else {
-        urlParams.set(paramKey, paramValue);
-    }
-    
-    // Reload the page with the new query string
-    window.location.search = urlParams.toString();
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Toggle logic: If clicking the same filter, remove it. Otherwise, set it.
+  if (urlParams.get(paramKey) === paramValue) {
+    urlParams.delete(paramKey);
+  } else {
+    urlParams.set(paramKey, paramValue);
+  }
+
+  // Reload the page with the new query string
+  window.location.search = urlParams.toString();
 }
+
+// --- E. Interactive Collection Picker Modal for Bookmarks ---
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("save-modal");
+  const closeModalBtn = document.getElementById("close-save-modal");
+  const collectionsListContainer = document.getElementById(
+    "modal-collections-list",
+  );
+  const createCollectionForm = document.getElementById(
+    "modal-create-collection-form",
+  );
+  const csrfInput = document.querySelector("[name=csrfmiddlewaretoken]");
+
+  let activeRecipeCardBtn = null;
+  let activeRecipeId = null;
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // Close modal when clicking outside content area
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const bookmarkBtn = e.target.closest(".bookmark-btn");
+    if (bookmarkBtn) {
+      e.preventDefault();
+      activeRecipeCardBtn = bookmarkBtn;
+      activeRecipeId = bookmarkBtn.getAttribute("data-recipe-id");
+      if (!activeRecipeId) return;
+
+      if (!csrfInput) {
+        alert("Please log in to save recipes.");
+        window.location.href = "/playground/login/";
+        return;
+      }
+
+      // Fetch collections data via AJAX request
+      fetchCollectionsAndOpenModal();
+    }
+  });
+
+  function fetchCollectionsAndOpenModal() {
+    fetch(`/playground/recipe/${activeRecipeId}/toggle-save/`, {
+      method: "POST",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": csrfInput.value,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        renderModalContent(data);
+        modal.style.display = "flex";
+        updateCardIconState(data);
+      })
+      .catch((err) => console.error("Error loading collections:", err));
+  }
+
+  function renderModalContent(data) {
+    collectionsListContainer.innerHTML = "";
+    data.user_collections.forEach((col) => {
+      const isChecked = data.recipe_collection_ids.includes(col.id);
+      const item = document.createElement("div");
+      item.style.cssText =
+        "display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--surface-container-low); border-radius:10px; cursor:pointer;";
+      item.innerHTML = `
+                <span style="font-weight:600; font-size:14px;">${col.name}</span>
+                <input type="checkbox" data-collection-id="${col.id}" ${isChecked ? "checked" : ""} style="width:18px; height:18px; accent-color:var(--primary); cursor:pointer;" />
+            `;
+
+      // Toggle item on click
+      item.addEventListener("click", (e) => {
+        if (e.target.tagName !== "INPUT") {
+          const checkbox = item.querySelector("input");
+          checkbox.checked = !checkbox.checked;
+          triggerToggle(col.id, checkbox.checked);
+        }
+      });
+
+      item.querySelector("input").addEventListener("change", (e) => {
+        triggerToggle(col.id, e.target.checked);
+      });
+
+      collectionsListContainer.appendChild(item);
+    });
+  }
+
+  function triggerToggle(collectionId, isChecked) {
+    const formData = new FormData();
+    formData.append("collection_id", collectionId);
+
+    fetch(`/playground/recipe/${activeRecipeId}/toggle-save/`, {
+      method: "POST",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": csrfInput.value,
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        updateCardIconState(data);
+      })
+      .catch((err) => console.error("Error toggling collection:", err));
+  }
+
+  function updateCardIconState(data) {
+    if (!activeRecipeCardBtn) return;
+    const icon = activeRecipeCardBtn.querySelector(
+      ".material-symbols-outlined",
+    );
+    if (data.recipe_collection_ids && data.recipe_collection_ids.length > 0) {
+      icon.style.fontVariationSettings = "'FILL' 1";
+      icon.style.color = "var(--primary)";
+    } else {
+      icon.style.fontVariationSettings = "'FILL' 0";
+      icon.style.color = "";
+    }
+  }
+
+  // Handle quick-creation of a collection right from the modal
+  if (createCollectionForm) {
+    createCollectionForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const inputField =
+        createCollectionForm.querySelector("input[name='name']");
+      const formData = new FormData(createCollectionForm);
+
+      fetch(`/playground/saved/create/`, {
+        method: "POST",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": csrfInput.value,
+        },
+        body: formData,
+      })
+        .then(() => {
+          inputField.value = "";
+          // Refresh modal collections list
+          fetchCollectionsAndOpenModal();
+        })
+        .catch((err) => console.error("Error creating collection:", err));
+    });
+  }
+});
