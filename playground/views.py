@@ -47,44 +47,76 @@ def privacy_policy_view(request):
 
 def recipe_discovery(request):
     query = request.GET.get('ingredients', '')
-    difficulty = request.GET.get('difficulty', '') # Added: Get difficulty
-    max_time = request.GET.get('max_time', '')     # Added: Get max prep time
-
-    recipes_list = Recipe.objects.all()
+    difficulty = request.GET.get('difficulty', '') 
+    max_time = request.GET.get('max_time', '')
     
-    # Extract unique tags for the autocomplete suggestions
+    recipes_qs = Recipe.objects.all()
+    
+    # Extract unique tags for autocomplete suggestions
     unique_tags = set()
-    for r in Recipe.objects.all():
+    for r in recipes_qs:
         for tag in r.get_tags_list():
             unique_tags.add(tag.lower())
 
-    # Create a list of active ingredients
+    # 1. Apply Difficulty & Time Filters FIRST
+    if difficulty:
+        recipes_qs = recipes_qs.filter(status__iexact=difficulty)
+        
+    if max_time and max_time.isdigit():
+        recipes_qs = recipes_qs.filter(prep_time__lte=int(max_time))
+
+    # 2. Apply Ingredient Filter & Calculate Match Ratio
     active_ingredients = [i.strip() for i in query.split(',') if i.strip()]
+    recipes_list = list(recipes_qs) # Default to all if no search query
+
     if active_ingredients:
         q_objects = Q()
         for ingredient in active_ingredients:
             q_objects |= Q(ingredients_list__icontains=ingredient) | Q(tags__icontains=ingredient)
+        
+        filtered_qs = recipes_qs.filter(q_objects).distinct()
+        recipes_list = list(filtered_qs)
+        
+        total_searched = len(active_ingredients)
+        for recipe in recipes_list:
+            match_count = 0
+            # Combine ingredients and tags into one lowercase string for easy checking
+            recipe_text = (recipe.ingredients_list + " " + recipe.tags).lower()
             
-        recipes_list = recipes_list.filter(q_objects).distinct()
+            for ingredient in active_ingredients:
+                if ingredient.lower() in recipe_text:
+                    match_count += 1
+            
+            # Dynamically assign match data to the recipe object
+            recipe.match_count = match_count
+            recipe.match_total = total_searched
+            match_percentage = (match_count / total_searched) * 100
+            
+            # Assign CSS classes based on the predefined styles in recipe_discovery.css
+            if match_percentage >= 100:
+                recipe.match_class = 'high'
+            elif match_percentage >= 50:
+                recipe.match_class = 'med'
+            else:
+                recipe.match_class = 'low'
+        
+        # Sort recipes by the highest match count descending
+        recipes_list.sort(key=lambda r: r.match_count, reverse=True)
+
+    # 3. Get User's Saved Recipes (for the bookmark icon states)
+    saved_recipe_ids = []
+    if request.user.is_authenticated:
+        saved_recipe_ids = list(request.user.collections.values_list('recipes__id', flat=True))
 
     context = {
         'recipes': recipes_list,
         'active_ingredients': active_ingredients,
         'all_tags_json': json.dumps(list(unique_tags)),
-        # Pass active filters back so the template can highlight them
         'active_difficulty': difficulty, 
         'active_time': max_time,
+        'saved_recipe_ids': saved_recipe_ids,
     }
     return render(request, 'recipe_discovery.html', context)
-        
-    context = {
-        'recipes': recipes_list,
-        'active_ingredients': active_ingredients,
-        'all_tags_json': json.dumps(list(unique_tags)),
-    }
-    return render(request, 'recipe_discovery.html', context)
-
-
 # ==========================================
 # 2. AUTHENTICATION VIEWS
 # ==========================================
@@ -156,21 +188,34 @@ def delete_collection(request, collection_id):
 def toggle_save_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     collection_id = request.POST.get('collection_id')
-
-    # Default to user's first collection if none specified
+    
     if collection_id:
         collection = get_object_or_404(Collection, id=collection_id, user=request.user)
+        if recipe in collection.recipes.all():
+            collection.recipes.remove(recipe)
+            saved = False
+        else:
+            collection.recipes.add(recipe)
+            saved = True
     else:
+        # If no specific collection was passed, default to 'Favorites'
         collection, _ = Collection.objects.get_or_create(user=request.user, name="Favorites")
+        if recipe in collection.recipes.all():
+            collection.recipes.remove(recipe)
+            saved = False
+        else:
+            collection.recipes.add(recipe)
+            saved = True
 
-    if recipe in collection.recipes.all():
-        collection.recipes.remove(recipe)
-        saved = False
-    else:
-        collection.recipes.add(recipe)
-        saved = True
-
-    # Support JSON requests from bookmark icons, fallback to redirect
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse({'saved': saved, 'collection': collection.name})
+        # Return all user collections and which ones contain this recipe
+        user_collections = list(request.user.collections.values('id', 'name'))
+        recipe_collection_ids = list(recipe.collections.filter(user=request.user).values_list('id', flat=True))
+        return JsonResponse({
+            'saved': saved, 
+            'collection': collection.name,
+            'user_collections': user_collections,
+            'recipe_collection_ids': recipe_collection_ids
+        })
+        
     return redirect(request.META.get('HTTP_REFERER', 'show_homepage'))
