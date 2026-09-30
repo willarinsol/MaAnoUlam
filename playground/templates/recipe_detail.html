@@ -32,7 +32,12 @@
         </nav>
         {% if request.user.is_authenticated %}
         <div class="profile-dropdown-container">
-          <button class="profile-btn" type="button">
+          <button
+            class="profile-btn"
+            type="button"
+            aria-expanded="false"
+            aria-label="Open account menu"
+          >
             <span class="material-symbols-outlined">person</span>
           </button>
           <div class="profile-dropdown-menu">
@@ -192,5 +197,6 @@
         </p>
       </div>
     </footer>
+    <script src="{% static 'script.js' %}"></script>
   </body>
 </html>

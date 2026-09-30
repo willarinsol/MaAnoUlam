@@ -17,6 +17,34 @@
             >My Saved Recipes</a
           >
         </nav>
+        {% if request.user.is_authenticated %}
+        <div class="profile-dropdown-container">
+          <button
+            class="profile-btn"
+            type="button"
+            aria-expanded="false"
+            aria-label="Open account menu"
+          >
+            <span class="material-symbols-outlined">person</span>
+          </button>
+          <div class="profile-dropdown-menu">
+            <span class="dropdown-user">Hi, {{ request.user.username }}</span>
+            <a href="{% url 'collections_view' %}"
+              ><span class="material-symbols-outlined">bookmark</span>Saved</a
+            >
+            <a href="{% url 'logout' %}" class="logout-link"
+              ><span class="material-symbols-outlined">logout</span>Log Out</a
+            >
+          </div>
+        </div>
+        {% else %}
+        <a
+          href="{% url 'login' %}"
+          class="primary-button"
+          style="padding: 6px 14px; text-decoration: none"
+          >Log In</a
+        >
+        {% endif %}
       </div>
     </header>
 
@@ -57,5 +85,6 @@
         </p>
       </div>
     </footer>
+    <script src="{% static 'script.js' %}"></script>
   </body>
 </html>

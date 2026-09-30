@@ -51,6 +51,44 @@ window.removeTag = function (btnElement, tagToRemove) {
 // 4. Main Event Listeners (Runs when page loads)
 // ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll(".profile-dropdown-container")
+    .forEach((container) => {
+      const button = container.querySelector(".profile-btn");
+      if (!button) return;
+
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = container.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      container.addEventListener("click", (event) => event.stopPropagation());
+    });
+
+  document.addEventListener("click", () => {
+    document
+      .querySelectorAll(".profile-dropdown-container.is-open")
+      .forEach((container) => {
+        container.classList.remove("is-open");
+        container
+          .querySelector(".profile-btn")
+          ?.setAttribute("aria-expanded", "false");
+      });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    document
+      .querySelectorAll(".profile-dropdown-container.is-open")
+      .forEach((container) => {
+        container.classList.remove("is-open");
+        container
+          .querySelector(".profile-btn")
+          ?.setAttribute("aria-expanded", "false");
+      });
+  });
+
   // --- A. Homepage Tags Deletion (existing static tags) ---
   const tagsContainer = document.querySelector(".ingredient-tags");
   if (tagsContainer) {

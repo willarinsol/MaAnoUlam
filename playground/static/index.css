@@ -310,6 +310,10 @@
     width: 100%;
   }
 
+  .site-header .primary-button {
+    width: auto;
+  }
+
   .trending-section {
     padding: 48px 0;
   }

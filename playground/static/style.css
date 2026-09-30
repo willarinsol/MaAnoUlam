@@ -166,9 +166,12 @@ input {
     width: min(calc(100% - 32px), var(--max-width));
   }
 
-  .nav-links,
-  .profile-btn {
+  .nav-links {
     display: none;
+  }
+
+  .profile-btn {
+    display: grid;
   }
 
   .footer-content {
@@ -261,7 +264,6 @@ input {
   color: var(--primary);
 }
 
-<<<<<<< HEAD
 .info-page {
   width: min(calc(100% - 48px), 820px);
   flex: 1;
@@ -330,61 +332,47 @@ input {
     margin-bottom: 32px;
     font-size: 17px;
   }
-=======
-/* Profile Dropdown Container */
+}
+
 .profile-dropdown-container {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-/* Invisible bridge to prevent the menu from disappearing when hovering */
-.profile-dropdown-container::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 0;
-  right: 0;
-  height: 15px;
-}
-
 .profile-dropdown-menu {
   display: none;
   position: absolute;
   right: 0;
-  top: calc(
-    100% + 10px
-  ); /* Pushes it down slightly for visual breathing room */
-  background-color: var(--surface);
-  min-width: 180px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Matches your existing card shadows */
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  z-index: 1000;
+  top: calc(100% + 8px);
+  min-width: 190px;
+  padding: 8px 0;
   flex-direction: column;
-  padding: 8px 0; /* Standardized spacing */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
 }
 
-/* Show dropdown smoothly on hover */
-.profile-dropdown-container:hover .profile-dropdown-menu {
+.profile-dropdown-container.is-open .profile-dropdown-menu {
   display: flex;
 }
 
 .dropdown-user {
-  padding: 8px 16px;
+  padding: 8px 16px 10px;
+  color: var(--primary);
+  border-bottom: 1px solid var(--surface-high);
   font-size: 14px;
   font-weight: 700;
-  color: var(--primary); /* Uses your core brand color */
-  border-bottom: 1px solid var(--surface-high);
-  margin-bottom: 4px;
 }
 
 .profile-dropdown-menu a {
   display: flex;
   align-items: center;
+  gap: 4px;
   padding: 10px 16px;
-  text-decoration: none;
-  color: var(--text-muted); /* Matches your standard nav links */
+  color: var(--text-muted);
   font-size: 14px;
   font-weight: 600;
   transition:
@@ -392,8 +380,9 @@ input {
     color 0.2s ease;
 }
 
-.profile-dropdown-menu a:hover {
-  background-color: var(--surface-light);
+.profile-dropdown-menu a:hover,
+.profile-dropdown-menu a:focus-visible {
+  background: var(--surface-light);
   color: var(--primary);
 }
 
@@ -401,7 +390,15 @@ input {
   color: #ba1a1a;
 }
 
-.profile-dropdown-menu a.logout-link:hover {
-  background-color: rgba(186, 26, 26, 0.05);
->>>>>>> 2628416f030187f1f3c5ff3ff9af708adfe129b1
+.profile-dropdown-menu a.logout-link:hover,
+.profile-dropdown-menu a.logout-link:focus-visible {
+  background: rgba(186, 26, 26, 0.05);
+}
+
+@media (max-width: 700px) {
+  .profile-dropdown-menu {
+    position: fixed;
+    top: 58px;
+    right: 16px;
+  }
 }
