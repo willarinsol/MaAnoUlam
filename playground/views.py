@@ -39,6 +39,12 @@ def recipe_detail(request, recipe_id):
     }
     return render(request, 'recipe_detail.html', context)
 
+def about_view(request):
+    return render(request, 'about.html')
+
+def privacy_policy_view(request):
+    return render(request, 'privacy_policy.html')
+
 def recipe_discovery(request):
     query = request.GET.get('ingredients', '')
     difficulty = request.GET.get('difficulty', '') # Added: Get difficulty

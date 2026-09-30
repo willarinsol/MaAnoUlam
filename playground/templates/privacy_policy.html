@@ -1,0 +1,75 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - MaAnoUlam?</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
+          <a class="nav-link" href="{% url 'collections_view' %}"
+            >My Saved Recipes</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="info-page container">
+      <p class="eyebrow">Privacy Policy</p>
+      <h1>Your privacy matters to us.</h1>
+      <p class="info-lead">
+        This policy explains what MaAnoUlam? collects and how the website uses
+        it.
+      </p>
+      <section class="info-section">
+        <h2>Information you provide</h2>
+        <p>
+          When you register, we collect the username and password information
+          needed to provide your account. Saved recipes and collections are
+          stored so they are available to you when you return.
+        </p>
+      </section>
+      <section class="info-section">
+        <h2>How we use information</h2>
+        <p>
+          We use account and saved-recipe information only to operate, maintain,
+          and improve MaAnoUlam?. We do not sell your personal information.
+        </p>
+      </section>
+      <section class="info-section">
+        <h2>Cookies and security</h2>
+        <p>
+          The website uses essential session cookies for sign-in and account
+          features. We take reasonable measures to protect stored information,
+          but no internet service can guarantee absolute security.
+        </p>
+      </section>
+      <section class="info-section">
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy when the website changes. The latest version
+          will always be available on this page.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="footer-links">
+          <a href="{% url 'about' %}">About Us</a>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+        </nav>
+        <p class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

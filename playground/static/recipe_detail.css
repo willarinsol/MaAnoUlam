@@ -262,7 +262,8 @@
   }
 
   .recipe-hero {
-    height: 409px;
+    height: min(500px, 72vh);
+    min-height: 400px;
   }
 
   .recipe-hero-content {
@@ -312,5 +313,10 @@
   .recipe-step p {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .recipe-sidebar h3 {
+    font-size: 21px;
+    line-height: 28px;
   }
 }

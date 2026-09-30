@@ -402,6 +402,38 @@ button {
 }
 
 /* Responsive Media Queries */
+@media (max-width: 639px) {
+  .main-content {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .sidebar {
+    gap: 16px;
+    padding: 16px;
+    background: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+  }
+
+  .filter-group h3 {
+    font-size: 20px;
+  }
+
+  .ingredients-bar {
+    align-items: stretch;
+    padding: 12px;
+  }
+
+  .search-container {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+
 @media (min-width: 640px) {
   .recipe-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -431,8 +463,13 @@ button {
   }
 }
 
-.meta-tag.tag{
-  background-color: rgba(74, 222, 128, 0.2); /* Light green matching your theme */
+.meta-tag.tag {
+  background-color: rgba(
+    74,
+    222,
+    128,
+    0.2
+  ); /* Light green matching your theme */
   color: var(--primary);
   border: 1px solid rgba(74, 222, 128, 0.4);
 }

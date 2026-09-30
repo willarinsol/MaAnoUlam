@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - MaAnoUlam?</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-container">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="nav-links">
+          <a class="nav-link" href="{% url 'discover_recipes' %}">Discover</a>
+          <a class="nav-link" href="{% url 'collections_view' %}"
+            >My Saved Recipes</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="info-page container">
+      <p class="eyebrow">About MaAnoUlam?</p>
+      <h1>Good food starts with what you already have.</h1>
+      <p class="info-lead">
+        MaAnoUlam? helps home cooks turn everyday ingredients into practical,
+        nourishing meals.
+      </p>
+      <section class="info-section">
+        <h2>Our purpose</h2>
+        <p>
+          We make recipe discovery feel less overwhelming. Add the ingredients
+          in your kitchen, explore ideas that fit your time, and save the meals
+          you want to make again.
+        </p>
+      </section>
+      <section class="info-section">
+        <h2>Made for real kitchens</h2>
+        <p>
+          Our recipes are designed for flexible home cooking, where
+          substitutions, leftovers, and a little creativity are part of the
+          process. We hope MaAnoUlam? makes planning dinner a little lighter.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="{% url 'show_homepage' %}">MaAnoUlam?</a>
+        <nav class="footer-links">
+          <a href="{% url 'about' %}">About Us</a>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+        </nav>
+        <p class="footer-copyright">
+          © 2026 MaAnoUlam? Fresh Vitality for every home cook.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

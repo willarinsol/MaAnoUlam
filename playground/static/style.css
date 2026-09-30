@@ -214,6 +214,19 @@ input {
     background: var(--primary-light);
     color: var(--primary-dark);
   }
+
+  .logo {
+    font-size: 21px;
+  }
+
+  .footer-content {
+    gap: 18px;
+  }
+
+  .footer-copyright {
+    max-width: 280px;
+    font-size: 12px;
+  }
 }
 /* Suggestion Dropdown Styling */
 .suggestion-list {
@@ -246,4 +259,74 @@ input {
 .suggestion-list li:hover {
   background: var(--surface-light);
   color: var(--primary);
+}
+
+.info-page {
+  width: min(calc(100% - 48px), 820px);
+  flex: 1;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.info-page h1 {
+  max-width: 720px;
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.1;
+}
+
+.info-lead {
+  max-width: 650px;
+  margin-bottom: 56px;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.info-section {
+  max-width: 680px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+}
+
+.info-section h2 {
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+}
+
+.info-section p {
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+@media (max-width: 700px) {
+  .suggestion-list {
+    width: 100%;
+  }
+
+  .info-page {
+    width: min(calc(100% - 32px), 820px);
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .info-page h1 {
+    font-size: 36px;
+  }
+
+  .info-lead {
+    margin-bottom: 32px;
+    font-size: 17px;
+  }
 }
